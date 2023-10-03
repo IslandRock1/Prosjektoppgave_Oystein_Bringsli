@@ -2,7 +2,7 @@
 #include "threepp/extras/imgui/ImguiContext.hpp"
 #include "threepp/threepp.hpp"
 
-#include <iostream>
+//#include <iostream>
 
 using namespace threepp;
 
@@ -20,37 +20,30 @@ int main() {
     auto scene = Scene::create();
 
     renderer.enableTextRendering();
-    int textYOffset = 30;
-    auto& textHandle = renderer.textHandle("Hello World");
-    textHandle.setPosition(0, canvas.size().height - textYOffset);
-    textHandle.scale = 2;
-
-    std::array<float, 3> posBuf{};
-    ImguiFunctionalContext ui(canvas.windowPtr(), [&] {
-        ImGui::SetNextWindowPos({0, 0}, 0, {0, 0});
-        ImGui::SetNextWindowSize({230, 0}, 0);
-        ImGui::Begin("Demo");
-        ImGui::SliderFloat3("position", posBuf.data(), -1.f, 1.f);
-        controls.enabled = !ImGui::IsWindowHovered();
-        ImGui::End();
-    });
+    int textYOffset = 5;
+    auto& textHandle0 = renderer.textHandle("Frame 0");
+    auto& textHandle1 = renderer.textHandle("Particles: 0");
+    textHandle0.setPosition(2, textYOffset + 3);
+    textHandle1.setPosition(2, 2 * textYOffset + 10);
+    textHandle0.scale = 1;
+    textHandle1.scale = 1;
 
     canvas.onWindowResize([&](WindowSize size) {
         camera->aspect = size.aspect();
         camera->updateProjectionMatrix();
         renderer.setSize(size);
-        textHandle.setPosition(0, size.height - textYOffset);
+        textHandle0.setPosition(0, textYOffset + 3);
+        textHandle1.setPosition(0, 2 * textYOffset + 10);
     });
 
     Clock clock;
-    float rotationSpeed = 1;
-    int name = 1;
+    int name = 0;
 
     canvas.animate([&] {
-        auto dt = clock.getDelta();
-
         renderer.render(*scene, *camera);
 
-        auto& textHandle = renderer.textHandle();
+        name++;
+        textHandle0.setText("Frame " + std::to_string(name));
+        textHandle1.setText("Particles: 0");
     });
 }
