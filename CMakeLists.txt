@@ -8,5 +8,7 @@ find_package(imgui CONFIG REQUIRED)
 
 add_executable(main src/main.cpp
         include/Vec2.hpp
-        src/Vec2.cpp)
+        src/Vec2.cpp
+        src/ThreeppHandler.cpp
+        include/ThreeppHandler.hpp)
 target_link_libraries(main PRIVATE threepp::threepp imgui::imgui)

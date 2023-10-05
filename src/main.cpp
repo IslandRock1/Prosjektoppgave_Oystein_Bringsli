@@ -2,17 +2,22 @@
 #include "threepp/extras/imgui/ImguiContext.hpp"
 #include "threepp/threepp.hpp"
 
-//#include <iostream>
+#include <iostream>
 
 using namespace threepp;
 
 int main() {
 
-    Canvas canvas("Particle Simulator", {{"aa", 4}});
-    GLRenderer renderer(canvas.size());
-    renderer.setClearColor(Color::aliceblue);
+    Canvas canvas("Particle Simulator", {{"aa", 4}, {"size", 10}});
 
-    auto camera = PerspectiveCamera::create();
+    std::cout << canvas.size().aspect() << std::endl;
+    //canvas.setSize(WindowSize::)
+
+    GLRenderer renderer(canvas.size());
+    renderer.setClearColor(Color::black);
+
+    //auto camera = PerspectiveCamera::create();
+    auto camera = OrthographicCamera::create();
     camera->position.z = 5;
 
     OrbitControls controls{*camera, canvas};
@@ -28,22 +33,35 @@ int main() {
     textHandle0.scale = 1;
     textHandle1.scale = 1;
 
-    canvas.onWindowResize([&](WindowSize size) {
-        camera->aspect = size.aspect();
-        camera->updateProjectionMatrix();
-        renderer.setSize(size);
-        textHandle0.setPosition(0, textYOffset + 3);
-        textHandle1.setPosition(0, 2 * textYOffset + 10);
-    });
+//    canvas.onWindowResize([&](WindowSize size) {
+//        camera->aspect = size.aspect();
+//        camera->updateProjectionMatrix();
+//        renderer.setSize(size);
+//        textHandle0.setPosition(0, textYOffset + 3);
+//        textHandle1.setPosition(0, 2 * textYOffset + 10);
+//    });
+
+    float radius = 1.0;
+    int segments = 64;
+
+    auto geometry = CircleGeometry::create(radius, segments);
+    auto material = MeshBasicMaterial::create();
+    material->color.copy(Color::aliceblue);
+    auto mesh = Mesh::create(geometry, material);
+    scene->add(mesh);
 
     Clock clock;
     int name = 0;
 
     canvas.animate([&] {
+        auto dt = clock.getDelta();
+
         renderer.render(*scene, *camera);
 
         name++;
         textHandle0.setText("Frame " + std::to_string(name));
         textHandle1.setText("Particles: 0");
+
+        //mesh->position += 0.1 * dt;
     });
 }
