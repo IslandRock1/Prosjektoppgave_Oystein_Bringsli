@@ -15,6 +15,7 @@ class ThreeppHandler {
 public:
     ThreeppHandler(const std::string& title);
     int addText(const std::string& label, int x, int y, float scale);
+    int addCircle(float radius, int segments = 32);
 
     void setWindowResizeListener();
     void setCanvasAnimate();
@@ -31,6 +32,7 @@ private:
 
     TextRenderer _textRenderer;
     std::vector<TextHandle*> _textHandles;
+    std::vector<std::shared_ptr<Mesh>> _meshVector;
 };
 
 #endif//PROSJEKTOPPGAVE_OYSTEIN_BRINGSLI_THREEPPHANDLER_HPP

@@ -34,11 +34,23 @@ ThreeppHandler::ThreeppHandler(const std::string& title)
 
 int ThreeppHandler::addText(const std::string& label, int x, int y, float scale) {
     auto& textHandle = _textRenderer.createHandle(label);
-    textHandle.setPosition(x, 7);
+    textHandle.setPosition(x, y);
     textHandle.scale = scale;
 
     _textHandles.push_back(&textHandle);
     return _textHandles.size() - 1;
+}
+
+int ThreeppHandler::addCircle(float radius, int segments) {
+    auto geometry = CircleGeometry::create(radius, segments);
+    auto material = MeshBasicMaterial::create();
+    material->color.copy(Color::aliceblue);
+    auto mesh = Mesh::create(geometry, material);
+
+    _meshVector.push_back(mesh);
+    _scene->add(mesh);
+
+    return _meshVector.size() - 1;
 }
 
 void ThreeppHandler::setWindowResizeListener() {
@@ -57,6 +69,5 @@ void ThreeppHandler::setCanvasAnimate() {
 
         frameCount++;
         _textHandles.at(0)->setText("Frame " + std::to_string(frameCount));
-
     });
 }
