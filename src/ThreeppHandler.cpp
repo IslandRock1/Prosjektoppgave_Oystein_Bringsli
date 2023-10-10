@@ -2,30 +2,33 @@
 // Created by Øystein Bringsli on 10/5/2023.
 //
 
-#include "../include/ThreeppHandler.hpp"
 #include <threepp/threepp.hpp>
+#include <string>
+
+#include "../include/ThreeppHandler.hpp"
 #include <string>
 
 using namespace threepp;
 
-ThreeppHandler::ThreeppHandler() {
+ThreeppHandler::ThreeppHandler(const std::string& title)
+    :_canvas(title, {{"aa", 4}}),
+      _renderer(_canvas.size()),
+      _camera(PerspectiveCamera::create()),
+      _scene(Scene::create())
 
-    Canvas canvas("Particle Simulator", {{"aa", 4}});
-    GLRenderer renderer(canvas.size());
-    renderer.setClearColor(Color::black);
+{
+    _renderer.setClearColor(Color::black);
 
-    auto camera = PerspectiveCamera::create();
-    camera->position.z = 5;
-    camera->aspect = canvas.size().aspect();
-    camera->updateProjectionMatrix();
+    _camera->position.z = 5;
+    _camera->aspect = _canvas.size().aspect();
+    _camera->updateProjectionMatrix();
 
-    OrbitControls controls{*camera, canvas};
-    auto scene = Scene::create();
+    OrbitControls controls{*_camera, _canvas};
 
-    canvas.onWindowResize([&](WindowSize size) {
-        camera->aspect = size.aspect();
-        camera->updateProjectionMatrix();
-        renderer.setSize(size);
+    _canvas.onWindowResize([&](WindowSize size) {
+        _camera->aspect = size.aspect();
+        _camera->updateProjectionMatrix();
+        _renderer.setSize(size);
     });
 }
 

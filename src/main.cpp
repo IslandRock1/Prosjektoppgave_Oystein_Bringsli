@@ -9,6 +9,8 @@ using namespace threepp;
 
 int main() {
 
+    ThreeppHandler handler;
+
     Canvas canvas("Particle Simulator", {{"aa", 4}});
     GLRenderer renderer(canvas.size());
     renderer.setClearColor(Color::black);
