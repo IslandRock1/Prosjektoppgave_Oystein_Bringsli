@@ -5,8 +5,11 @@
 #ifndef PROSJEKTOPPGAVE_OYSTEIN_BRINGSLI_THREEPPHANDLER_HPP
 #define PROSJEKTOPPGAVE_OYSTEIN_BRINGSLI_THREEPPHANDLER_HPP
 
+#include <threepp/threepp.hpp>
+using namespace threepp;
 
 class ThreeppHandler {
+    ThreeppHandler();
 };
 
 

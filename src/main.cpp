@@ -1,5 +1,5 @@
 
-#include "threepp/extras/imgui/ImguiContext.hpp"
+//#include "threepp/extras/imgui/ImguiContext.hpp"
 #include "threepp/threepp.hpp"
 
 #include <iostream>
@@ -8,7 +8,7 @@ using namespace threepp;
 
 int main() {
 
-    Canvas canvas("Particle Simulator", {{"aa", 4}, {"size", 10}});
+    Canvas canvas("Particle Simulator", {{"aa", 4}});
 
     std::cout << canvas.size().aspect() << std::endl;
     //canvas.setSize(WindowSize::)
@@ -17,8 +17,10 @@ int main() {
     renderer.setClearColor(Color::black);
 
     //auto camera = PerspectiveCamera::create();
-    auto camera = OrthographicCamera::create();
+    auto camera = PerspectiveCamera::create();
     camera->position.z = 5;
+    camera->aspect = canvas.size().aspect();
+    camera->updateProjectionMatrix();
 
     OrbitControls controls{*camera, canvas};
 
@@ -33,13 +35,13 @@ int main() {
     textHandle0.scale = 1;
     textHandle1.scale = 1;
 
-//    canvas.onWindowResize([&](WindowSize size) {
-//        camera->aspect = size.aspect();
-//        camera->updateProjectionMatrix();
-//        renderer.setSize(size);
-//        textHandle0.setPosition(0, textYOffset + 3);
-//        textHandle1.setPosition(0, 2 * textYOffset + 10);
-//    });
+    canvas.onWindowResize([&](WindowSize size) {
+        camera->aspect = size.aspect();
+        camera->updateProjectionMatrix();
+        renderer.setSize(size);
+        textHandle0.setPosition(0, textYOffset + 3);
+        textHandle1.setPosition(0, 2 * textYOffset + 10);
+    });
 
     float radius = 1.0;
     int segments = 64;
