@@ -40,3 +40,23 @@ int ThreeppHandler::addText(const std::string& label, int x, int y, float scale)
     _textHandles.push_back(&textHandle);
     return _textHandles.size() - 1;
 }
+
+void ThreeppHandler::setWindowResizeListener() {
+    _canvas.onWindowResize([&](WindowSize size) {
+        _camera->aspect = size.aspect();
+        _camera->updateProjectionMatrix();
+        _renderer.setSize(size);
+    });
+}
+
+void ThreeppHandler::setCanvasAnimate() {
+    _canvas.animate([&] {
+        _renderer.render(*_scene, *_camera);
+        _renderer.resetState();// needed when using TextRenderer
+        _textRenderer.render();
+
+        frameCount++;
+        _textHandles.at(0)->setText("Frame " + std::to_string(frameCount));
+
+    });
+}

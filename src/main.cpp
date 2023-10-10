@@ -9,38 +9,12 @@ using namespace threepp;
 
 int main() {
 
-    ThreeppHandler handler;
+    ThreeppHandler handler{"Particle Simulator"};
 
-    Canvas canvas("Particle Simulator", {{"aa", 4}});
-    GLRenderer renderer(canvas.size());
-    renderer.setClearColor(Color::black);
+    int ix = handler.addText("Frame: 0", 0, 0, 1.5);
+    handler.setCanvasAnimate();
 
-    auto camera = PerspectiveCamera::create();
-    camera->position.z = 5;
-    camera->aspect = canvas.size().aspect();
-    camera->updateProjectionMatrix();
-
-    OrbitControls controls{*camera, canvas};
-
-    auto scene = Scene::create();
-
-    TextRenderer textRenderer;
-    auto& textHandle0 = textRenderer.createHandle("Frame 0");
-    auto& textHandle1 = textRenderer.createHandle("Particles: 0");
-    textHandle0.setPosition(0, 5);
-    textHandle1.setPosition(0, 25);
-    textHandle0.scale = 1.5;
-    textHandle1.scale = 1.5;
-
-    canvas.onWindowResize([&](WindowSize size) {
-        camera->aspect = size.aspect();
-        camera->updateProjectionMatrix();
-        renderer.setSize(size);
-        textHandle0.setPosition(0, 5);
-        textHandle1.setPosition(0, 25);
-    });
-
-    float radius = 1.0;
+    /*float radius = 1.0;
     int segments = 64;
 
     auto geometry = CircleGeometry::create(radius, segments);
@@ -49,8 +23,6 @@ int main() {
     auto mesh = Mesh::create(geometry, material);
     scene->add(mesh);
 
-    Clock clock;
-    int frameCount = 0;
 
     canvas.animate([&] {
         auto dt = clock.getDelta();
@@ -64,5 +36,5 @@ int main() {
         textHandle1.setText("Particles: 0");
 
         //mesh->position += 0.1 * dt;
-    });
+    });*/
 }
