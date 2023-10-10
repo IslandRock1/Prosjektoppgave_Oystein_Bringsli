@@ -9,14 +9,9 @@ using namespace threepp;
 int main() {
 
     Canvas canvas("Particle Simulator", {{"aa", 4}});
-
-    std::cout << canvas.size().aspect() << std::endl;
-    //canvas.setSize(WindowSize::)
-
     GLRenderer renderer(canvas.size());
     renderer.setClearColor(Color::black);
 
-    //auto camera = PerspectiveCamera::create();
     auto camera = PerspectiveCamera::create();
     camera->position.z = 5;
     camera->aspect = canvas.size().aspect();
@@ -26,21 +21,22 @@ int main() {
 
     auto scene = Scene::create();
 
-    renderer.enableTextRendering();
-    int textYOffset = 5;
-    auto& textHandle0 = renderer.textHandle("Frame 0");
-    auto& textHandle1 = renderer.textHandle("Particles: 0");
-    textHandle0.setPosition(2, textYOffset + 3);
-    textHandle1.setPosition(2, 2 * textYOffset + 10);
-    textHandle0.scale = 1;
-    textHandle1.scale = 1;
+    TextRenderer textRenderer;
+    auto& textHandle0 = textRenderer.createHandle("Frame 0");
+    auto& textHandle1 = textRenderer.createHandle("Particles: 0");
+    textHandle0.verticalAlignment = threepp::TextHandle::VerticalAlignment::TOP;
+    textHandle1.verticalAlignment = threepp::TextHandle::VerticalAlignment::TOP;
+    textHandle0.setPosition(0, 5);
+    textHandle1.setPosition(0, 25);
+    textHandle0.scale = 1.5;
+    textHandle1.scale = 1.5;
 
     canvas.onWindowResize([&](WindowSize size) {
         camera->aspect = size.aspect();
         camera->updateProjectionMatrix();
         renderer.setSize(size);
-        textHandle0.setPosition(0, textYOffset + 3);
-        textHandle1.setPosition(0, 2 * textYOffset + 10);
+        textHandle0.setPosition(0, 5);
+        textHandle1.setPosition(0, 25);
     });
 
     float radius = 1.0;
@@ -53,15 +49,17 @@ int main() {
     scene->add(mesh);
 
     Clock clock;
-    int name = 0;
+    int frameCount = 0;
 
     canvas.animate([&] {
         auto dt = clock.getDelta();
 
         renderer.render(*scene, *camera);
+        renderer.resetState();// needed when using TextRenderer
+        textRenderer.render();
 
-        name++;
-        textHandle0.setText("Frame " + std::to_string(name));
+        frameCount++;
+        textHandle0.setText("Frame " + std::to_string(frameCount));
         textHandle1.setText("Particles: 0");
 
         //mesh->position += 0.1 * dt;
