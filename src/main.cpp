@@ -1,8 +1,9 @@
 
 //#include "threepp/extras/imgui/ImguiContext.hpp"
-#include "threepp/threepp.hpp"
-
+#include <threepp/threepp.hpp>
 #include <iostream>
+
+#include "ThreeppHandler.hpp"
 
 using namespace threepp;
 
@@ -24,8 +25,6 @@ int main() {
     TextRenderer textRenderer;
     auto& textHandle0 = textRenderer.createHandle("Frame 0");
     auto& textHandle1 = textRenderer.createHandle("Particles: 0");
-    textHandle0.verticalAlignment = threepp::TextHandle::VerticalAlignment::TOP;
-    textHandle1.verticalAlignment = threepp::TextHandle::VerticalAlignment::TOP;
     textHandle0.setPosition(0, 5);
     textHandle1.setPosition(0, 25);
     textHandle0.scale = 1.5;

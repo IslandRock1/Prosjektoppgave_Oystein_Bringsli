@@ -1,14 +1,16 @@
 //
-// Created by oyste on 10/5/2023.
+// Created by Øystein Bringsli on 10/5/2023.
 //
 
 #include "../include/ThreeppHandler.hpp"
 #include <threepp/threepp.hpp>
+#include <string>
+
 using namespace threepp;
 
 ThreeppHandler::ThreeppHandler() {
-    Canvas canvas("Particle Simulator", {{"aa", 4}});
 
+    Canvas canvas("Particle Simulator", {{"aa", 4}});
     GLRenderer renderer(canvas.size());
     renderer.setClearColor(Color::black);
 
@@ -25,4 +27,13 @@ ThreeppHandler::ThreeppHandler() {
         camera->updateProjectionMatrix();
         renderer.setSize(size);
     });
+}
+
+int ThreeppHandler::addText(const std::string& label, int x, int y, float scale) {
+    auto& textHandle = _textRenderer.createHandle(label);
+    textHandle.setPosition(x, 7);
+    textHandle.scale = scale;
+
+    _textHandles.push_back(&textHandle);
+    return _textHandles.size() - 1;
 }
