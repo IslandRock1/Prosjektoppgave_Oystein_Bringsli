@@ -16,27 +16,4 @@ int main() {
 
     int ix3 = handler.addCircle(1.0);
     handler.setCanvasAnimate();
-
-    /*float radius = 1.0;
-    int segments = 64;
-
-    auto geometry = CircleGeometry::create(radius, segments);
-    auto material = MeshBasicMaterial::create();
-    material->color.copy(Color::aliceblue);
-    auto mesh = Mesh::create(geometry, material);
-    scene->add(mesh);
-
-
-    canvas.animate([&] {
-
-        renderer.render(*scene, *camera);
-        renderer.resetState();// needed when using TextRenderer
-        textRenderer.render();
-
-        frameCount++;
-        textHandle0.setText("Frame " + std::to_string(frameCount));
-        textHandle1.setText("Particles: 0");
-
-        //mesh->position += 0.1 * dt;
-    });*/
 }

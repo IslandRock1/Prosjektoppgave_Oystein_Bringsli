@@ -27,8 +27,8 @@ private:
     GLRenderer _renderer;
     std::shared_ptr<PerspectiveCamera> _camera;
     std::shared_ptr<Scene> _scene;
+    OrbitControls _controls;
     Clock _clock;
-
 
     TextRenderer _textRenderer;
     std::vector<TextHandle*> _textHandles;

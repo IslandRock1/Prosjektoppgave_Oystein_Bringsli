@@ -14,7 +14,8 @@ ThreeppHandler::ThreeppHandler(const std::string& title)
     :_canvas(title, {{"aa", 4}}),
       _renderer(_canvas.size()),
       _camera(PerspectiveCamera::create()),
-      _scene(Scene::create())
+      _scene(Scene::create()),
+      _controls(*_camera, _canvas)
 
 {
     _renderer.setClearColor(Color::black);
@@ -22,8 +23,6 @@ ThreeppHandler::ThreeppHandler(const std::string& title)
     _camera->position.z = 5;
     _camera->aspect = _canvas.size().aspect();
     _camera->updateProjectionMatrix();
-
-    OrbitControls controls{*_camera, _canvas};
 
     _canvas.onWindowResize([&](WindowSize size) {
         _camera->aspect = size.aspect();
@@ -52,6 +51,7 @@ int ThreeppHandler::addCircle(float radius, int segments) {
 
     return _meshVector.size() - 1;
 }
+
 
 void ThreeppHandler::setWindowResizeListener() {
     _canvas.onWindowResize([&](WindowSize size) {
