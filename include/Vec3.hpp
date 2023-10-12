@@ -12,6 +12,11 @@ public:
     Vec3(float x, float y, float z);
     Vec3(int x, int y, int z);
 
+    void operator+(const Vec3 &other);
+    void operator-(const Vec3 &other);
+    void operator*(const Vec3 &other);
+    void operator/(const Vec3 &other);
+
     double x, y, z;
 };
 

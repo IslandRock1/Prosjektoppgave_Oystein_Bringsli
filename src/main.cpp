@@ -1,13 +1,15 @@
 
-//#include "threepp/extras/imgui/ImguiContext.hpp"
 #include <threepp/threepp.hpp>
 #include <iostream>
 
 #include "ThreeppHandler.hpp"
+#include "Vec3.hpp"
 
 using namespace threepp;
 
 int main() {
+
+
 
     ThreeppHandler handler{"Particle Simulator"};
 
