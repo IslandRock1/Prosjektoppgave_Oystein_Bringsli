@@ -15,10 +15,12 @@ class ThreeppHandler {
 public:
     ThreeppHandler(const std::string& title);
     int addText(const std::string& label, int x, int y, float scale);
+
     int addCircle(float radius, int segments = 32);
+    int addSphere(float radius);
 
     void setWindowResizeListener();
-    void setCanvasAnimate();
+    void setCanvasAnimate(int ix0, int ix1);
 
     int frameCount = 0;
 

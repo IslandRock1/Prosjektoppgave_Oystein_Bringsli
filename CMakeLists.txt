@@ -7,14 +7,14 @@ find_package(threepp CONFIG REQUIRED)
 
 set(
         headers
-        include/Vec2.hpp
+        include/Vec3.hpp
         include/ThreeppHandler.hpp
 )
 
 set(
         sources
         src/main.cpp
-        src/Vec2.cpp
+        src/Vec3.cpp
         src/ThreeppHandler.cpp
 )
 

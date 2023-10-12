@@ -52,6 +52,17 @@ int ThreeppHandler::addCircle(float radius, int segments) {
     return _meshVector.size() - 1;
 }
 
+int ThreeppHandler::addSphere(float radius) {
+    auto geometry = SphereGeometry::create(radius);
+    auto material = MeshBasicMaterial::create();
+    material->color.copy(Color::green);
+    auto mesh = Mesh::create(geometry, material);
+
+    _meshVector.push_back(mesh);
+    _scene->add(mesh);
+
+    return _meshVector.size() - 1;
+}
 
 void ThreeppHandler::setWindowResizeListener() {
     _canvas.onWindowResize([&](WindowSize size) {
@@ -61,8 +72,14 @@ void ThreeppHandler::setWindowResizeListener() {
     });
 }
 
-void ThreeppHandler::setCanvasAnimate() {
+void ThreeppHandler::setCanvasAnimate(int ix0, int ix1) {
     _canvas.animate([&] {
+
+        auto dt = _clock.getDelta();
+
+        _meshVector.at(ix0)->position += Vector3(0.5, 0, 0) * dt;
+        _meshVector.at(ix1)->position += Vector3(-0.5, 0, 0) * dt;
+
         _renderer.render(*_scene, *_camera);
         _renderer.resetState();// needed when using TextRenderer
         _textRenderer.render();
