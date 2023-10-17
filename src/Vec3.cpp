@@ -36,3 +36,32 @@ void Vec3::operator/(const Vec3 &other) {
     y /= other.y;
     z /= other.z;
 }
+
+template <typename T>
+void Vec3::operator+(T other) {
+    x += other;
+    y += other;
+    z += other;
+}
+
+template <typename T>
+void Vec3::operator-(T other) {
+    x -= other;
+    y -= other;
+    z -= other;
+}
+
+template <typename T>
+void Vec3::operator*(T other) {
+    x *= other;
+    y *= other;
+    z *= other;
+}
+
+template <typename T>
+void Vec3::operator/(T other) {
+    x /= other;
+    y /= other;
+    z /= other;
+}
+

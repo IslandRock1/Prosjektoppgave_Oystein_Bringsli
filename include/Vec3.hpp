@@ -17,6 +17,15 @@ public:
     void operator*(const Vec3 &other);
     void operator/(const Vec3 &other);
 
+    template <typename T>
+    void operator+(T other);
+    template <typename T>
+    void operator-(T other);
+    template <typename T>
+    void operator*(T other);
+    template <typename T>
+    void operator/(T other);
+
     double x, y, z;
 };
 

@@ -9,8 +9,6 @@ using namespace threepp;
 
 int main() {
 
-
-
     ThreeppHandler handler{"Particle Simulator"};
 
     int ix = handler.addText("Frame 0", 0, 0, 1.5);

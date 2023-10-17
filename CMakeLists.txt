@@ -8,6 +8,7 @@ find_package(threepp CONFIG REQUIRED)
 set(
         headers
         include/Vec3.hpp
+        include/Particle.hpp
         include/ThreeppHandler.hpp
 )
 
@@ -15,6 +16,7 @@ set(
         sources
         src/main.cpp
         src/Vec3.cpp
+        src/Particle.cpp
         src/ThreeppHandler.cpp
 )
 
