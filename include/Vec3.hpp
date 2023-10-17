@@ -12,19 +12,19 @@ public:
     Vec3(float x, float y, float z);
     Vec3(int x, int y, int z);
 
-    void operator+(const Vec3 &other);
-    void operator-(const Vec3 &other);
-    void operator*(const Vec3 &other);
-    void operator/(const Vec3 &other);
+    Vec3& operator+=(const Vec3 &other);
+    Vec3& operator-=(const Vec3 &other);
+    Vec3& operator*=(const Vec3 &other);
+    Vec3& operator/=(const Vec3 &other);
 
     template <typename T>
-    void operator+(T other);
+    Vec3& operator+=(T other);
     template <typename T>
-    void operator-(T other);
+    Vec3& operator-=(T other);
     template <typename T>
-    void operator*(T other);
+    Vec3& operator*=(T other);
     template <typename T>
-    void operator/(T other);
+    Vec3& operator/=(T other);
 
     double x, y, z;
 };
