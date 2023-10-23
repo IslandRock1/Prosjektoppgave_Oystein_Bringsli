@@ -5,7 +5,6 @@
 #ifndef PROSJEKTOPPGAVE_OYSTEIN_BRINGSLI_VEC3_HPP
 #define PROSJEKTOPPGAVE_OYSTEIN_BRINGSLI_VEC3_HPP
 
-
 class Vec3 {
 public:
     Vec3(double x, double y, double z);
@@ -18,15 +17,16 @@ public:
     Vec3& operator+=(const Vec3 &other);
     Vec3& operator-=(const Vec3 &other);
 
-    template<typename T>
+    template<class T>
     Vec3 operator +(T other) const;
-    template<typename T>
+    template<class T>
     Vec3 operator -(T other) const;
-    template<typename T>
+    template<class T>
     Vec3 operator *(T other) const;
-    template<typename T>
+    template<class T>
     Vec3 operator /(T other) const;
 
+      /*
     template <typename T>
     Vec3& operator+=(T other);
     template <typename T>
@@ -34,9 +34,11 @@ public:
     template <typename T>
     Vec3& operator*=(T other);
     template <typename T>
-    Vec3& operator/=(T other);
+    Vec3& operator/=(T other);*/
 
-    double x, y, z;
+    double x;
+    double y;
+    double z;
 };
 
 

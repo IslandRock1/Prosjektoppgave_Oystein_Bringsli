@@ -2,7 +2,7 @@
 // Created by Øystein Bringsli on 10/3/2023.
 //
 
-#include "../include/Vec3.hpp"
+#include "Vec3.hpp"
 
 Vec3::Vec3(double x, double y, double z)
     :x(x), y(y), z(z) {};
@@ -25,7 +25,6 @@ Vec3& Vec3::operator+=(const Vec3 &other) {
     x += other.x;
     y += other.y;
     z += other.z;
-
     return *this;
 }
 
@@ -33,36 +32,35 @@ Vec3& Vec3::operator-=(const Vec3 &other) {
     x -= other.x;
     y -= other.y;
     z -= other.z;
-
     return *this;
 }
 
-template <typename T>
+template <class T>
 Vec3 Vec3::operator+(T other) const {
     return {x + other, y + other, z + other};
 }
 
-template <typename T>
+template <class T>
 Vec3 Vec3::operator-(T other) const {
     return {x - other, y - other, z - other};
 }
 
-template <typename T>
+template <class T>
 Vec3 Vec3::operator*(T other) const {
     return {x * other, y * other, z * other};
 }
 
-template <typename T>
+template <class T>
 Vec3 Vec3::operator/(T other) const {
     return {x / other, y / other, z / other};
 }
 
+ /*
 template <typename T>
 Vec3& Vec3::operator+=(T other) {
     x += other;
     y += other;
     z += other;
-
     return *this;
 }
 
@@ -71,7 +69,6 @@ Vec3& Vec3::operator-=(T other) {
     x -= other;
     y -= other;
     z -= other;
-
     return *this;
 }
 
@@ -80,7 +77,6 @@ Vec3& Vec3::operator*=(T other) {
     x *= other;
     y *= other;
     z *= other;
-
     return *this;
 }
 
@@ -89,7 +85,7 @@ Vec3& Vec3::operator/=(T other) {
     x /= other;
     y /= other;
     z /= other;
-
     return *this;
 }
 
+*/

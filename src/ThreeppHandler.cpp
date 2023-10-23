@@ -5,7 +5,7 @@
 #include <threepp/threepp.hpp>
 #include <string>
 
-#include "../include/ThreeppHandler.hpp"
+#include "ThreeppHandler.hpp"
 #include <string>
 
 using namespace threepp;
