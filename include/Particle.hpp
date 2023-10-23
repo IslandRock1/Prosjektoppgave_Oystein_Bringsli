@@ -13,6 +13,7 @@ public:
     Vec3 pos;
 
     Particle(Vec3 pos, Vec3 vel, double dt, int index);
+    Particle(Vec3 pos, Vec3 prev_pos, int index);
     Particle(Vec3 pos, int index);
 
     void Move(double dt);

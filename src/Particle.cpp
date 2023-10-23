@@ -6,7 +6,10 @@
 #include "Particle.hpp"
 
 Particle::Particle(Vec3 pos, Vec3 vel, double dt, int index)
-    : pos(pos), _pos_prev(pos), _index(index) {}; //_pos_prev(pos - vel * dt)
+    : pos(pos), _pos_prev(pos - vel * dt), _index(index) {}
+
+Particle::Particle(Vec3 pos, Vec3 prev_pos, int index)
+    : pos(pos), _pos_prev(prev_pos), _index(index) {}
 
 Particle::Particle(Vec3 pos, int index)
     : pos(pos), _pos_prev(pos), _index(index) {}

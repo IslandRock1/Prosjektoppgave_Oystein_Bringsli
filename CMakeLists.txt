@@ -10,6 +10,7 @@ set(
         include/Vec3.hpp
         include/Particle.hpp
         include/ThreeppHandler.hpp
+        include/ParticleHandler.hpp
 )
 
 set(
@@ -18,6 +19,7 @@ set(
         src/main.cpp
         src/Particle.cpp
         src/ThreeppHandler.cpp
+        src/ParticleHandler.cpp
 )
 
 add_executable(main ${sources} ${headers})
