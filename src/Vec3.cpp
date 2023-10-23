@@ -13,6 +13,14 @@ Vec3::Vec3(float x, float y, float z)
 Vec3::Vec3(int x, int y, int z)
     :x(static_cast<double>(x)), y(static_cast<double>(y)), z(static_cast<double>(z)){};
 
+Vec3 Vec3::operator+(const Vec3 &other) const {
+    return {x + other.x, y + other.y, z + other.z};
+}
+
+Vec3 Vec3::operator-(const Vec3 &other) const {
+    return {x - other.x, y - other.y, z - other.z};
+}
+
 Vec3& Vec3::operator+=(const Vec3 &other) {
     x += other.x;
     y += other.y;
@@ -29,20 +37,24 @@ Vec3& Vec3::operator-=(const Vec3 &other) {
     return *this;
 }
 
-Vec3& Vec3::operator*=(const Vec3 &other) {
-    x *= other.x;
-    y *= other.y;
-    z *= other.z;
-
-    return *this;
+template <typename T>
+Vec3 Vec3::operator+(T other) const {
+    return {x + other, y + other, z + other};
 }
 
-Vec3& Vec3::operator/=(const Vec3 &other) {
-    x /= other.x;
-    y /= other.y;
-    z /= other.z;
+template <typename T>
+Vec3 Vec3::operator-(T other) const {
+    return {x - other, y - other, z - other};
+}
 
-    return *this;
+template <typename T>
+Vec3 Vec3::operator*(T other) const {
+    return {x * other, y * other, z * other};
+}
+
+template <typename T>
+Vec3 Vec3::operator/(T other) const {
+    return {x / other, y / other, z / other};
 }
 
 template <typename T>
