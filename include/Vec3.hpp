@@ -26,7 +26,6 @@ public:
     template<class T>
     Vec3 operator /(T other) const;
 
-      /*
     template <typename T>
     Vec3& operator+=(T other);
     template <typename T>
@@ -34,12 +33,64 @@ public:
     template <typename T>
     Vec3& operator*=(T other);
     template <typename T>
-    Vec3& operator/=(T other);*/
+    Vec3& operator/=(T other);
 
     double x;
     double y;
     double z;
 };
+
+template<class T>
+Vec3 Vec3::operator+(T other) const {
+    return {x + other, y + other, z + other};
+}
+
+template<class T>
+Vec3 Vec3::operator-(T other) const {
+    return {x - other, y - other, z - other};
+}
+
+template<class T>
+Vec3 Vec3::operator*(T other) const {
+    return {x * other, y * other, z * other};
+}
+
+template<class T>
+Vec3 Vec3::operator/(T other) const {
+    return {x / other, y / other, z / other};
+}
+
+template<typename T>
+Vec3& Vec3::operator+=(T other) {
+    x += other;
+    y += other;
+    z += other;
+    return *this;
+}
+
+template<typename T>
+Vec3& Vec3::operator-=(T other) {
+    x -= other;
+    y -= other;
+    z -= other;
+    return *this;
+}
+
+template<typename T>
+Vec3& Vec3::operator*=(T other) {
+    x *= other;
+    y *= other;
+    z *= other;
+    return *this;
+}
+
+template<typename T>
+Vec3& Vec3::operator/=(T other) {
+    x /= other;
+    y /= other;
+    z /= other;
+    return *this;
+}
 
 
 #endif//PROSJEKTOPPGAVE_OYSTEIN_BRINGSLI_VEC3_HPP

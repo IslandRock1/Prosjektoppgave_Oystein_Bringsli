@@ -14,8 +14,8 @@ set(
 
 set(
         sources
-        src/main.cpp
         src/Vec3.cpp
+        src/main.cpp
         src/Particle.cpp
         src/ThreeppHandler.cpp
 )
