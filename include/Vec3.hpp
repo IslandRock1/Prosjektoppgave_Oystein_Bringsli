@@ -35,6 +35,12 @@ public:
     template <typename T>
     Vec3& operator/=(T other);
 
+    double length() const;
+    double length_cube() const;
+
+    Vec3 norm() const;
+    Vec3& norm_inline();
+
     double x;
     double y;
     double z;

@@ -21,17 +21,29 @@ public:
     ParticleHandler(Vec3 bounding_box_size, int max_antall, double radius);
 
     void step(double dt);
-    void makeParticle(Vec3 pos)
+    void makeParticle();
+    void makeParticle(Vec3 pos);
+    void makeParticle(Vec3 pos, Vec3 prev_pos);
+    void makeParticle(Vec3 pos, Vec3 vel, double dt);
     std::vector<Particle> getParticles();
+    double getRadius();
 
 private:
     int _antall;
+    int _currentAntall = 0;
     double _radius;
+    std::vector<Particle> _particles;
+
+    Vec3 _startPos = {0, 0, 0};
 
     GravityType _gravityType = GravityType::No_Gravity;
-    Vec3 _gravityStrength = {0, 0, 0};
+    double _gravityStrength = 0;
 
     Vec3 _bounding_box;
+    int _substeps = 8;
+
+    void addGravity();
+    void handleWallColl();
 };
 
 

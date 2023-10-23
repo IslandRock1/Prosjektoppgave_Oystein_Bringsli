@@ -20,7 +20,7 @@ ThreeppHandler::ThreeppHandler(const std::string& title)
 {
     _renderer.setClearColor(Color::black);
 
-    _camera->position.z = 5;
+    _camera->position.z = 100;
     _camera->aspect = _canvas.size().aspect();
     _camera->updateProjectionMatrix();
 
@@ -64,6 +64,19 @@ int ThreeppHandler::addSphere(float radius) {
     return _meshVector.size() - 1;
 }
 
+int ThreeppHandler::addSphere(Vec3 pos, float radius) {
+    auto geometry = SphereGeometry::create(radius);
+    auto material = MeshBasicMaterial::create();
+    material->color.copy(Color::green);
+    auto mesh = Mesh::create(geometry, material);
+    mesh->position = Vector3(pos.x, pos.y, pos.z);
+
+    _meshVector.push_back(mesh);
+    _scene->add(mesh);
+
+    return _meshVector.size() - 1;
+}
+
 void ThreeppHandler::setWindowResizeListener() {
     _canvas.onWindowResize([&](WindowSize size) {
         _camera->aspect = size.aspect();
@@ -72,19 +85,19 @@ void ThreeppHandler::setWindowResizeListener() {
     });
 }
 
-void ThreeppHandler::setCanvasAnimate(int ix0, int ix1) {
+void ThreeppHandler::setCanvasAnimate(std::vector<int> indices) {
     _canvas.animate([&] {
 
         auto dt = _clock.getDelta();
 
-        _meshVector.at(ix0)->position += Vector3(0.5, 0, 0) * dt;
-        _meshVector.at(ix1)->position += Vector3(-0.5, 0, 0) * dt;
-
         _renderer.render(*_scene, *_camera);
-        _renderer.resetState();// needed when using TextRenderer
+        _renderer.resetState(); // needed when using TextRenderer
         _textRenderer.render();
 
         frameCount++;
         _textHandles.at(0)->setText("Frame " + std::to_string(frameCount));
+
+        _meshVector.at(indices.at(0))->position += Vector3(1, 1, 1);
+        _meshVector.at(1)->position -= Vector3(1, 1, 1);
     });
 }

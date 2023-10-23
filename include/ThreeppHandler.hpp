@@ -8,6 +8,7 @@
 #include <threepp/threepp.hpp>
 #include <vector>
 #include <string>
+#include "Vec3.hpp"
 
 using namespace threepp;
 
@@ -18,9 +19,10 @@ public:
 
     int addCircle(float radius, int segments = 32);
     int addSphere(float radius);
+    int addSphere(Vec3 pos, float radius);
 
     void setWindowResizeListener();
-    void setCanvasAnimate(int ix0, int ix1);
+    void setCanvasAnimate(std::vector<int> indices);
 
     int frameCount = 0;
 

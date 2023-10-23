@@ -17,6 +17,12 @@ public:
     Particle(Vec3 pos, int index);
 
     void Move(double dt);
+    int getIndex() const;
+
+    void reset_Gravity();
+    void add_Gravity_Ground(double gravity_strength);
+    void add_Gravity_Center(Vec3 center_pos, double gravity_strength);
+    void add_Gravity_Between(const Particle &p, double gravity_strength);
 
 private:
     Vec3 _pos_prev;
