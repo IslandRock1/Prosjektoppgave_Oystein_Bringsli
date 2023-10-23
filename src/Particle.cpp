@@ -12,5 +12,5 @@ Particle::Particle(Vec3 pos, int index)
     : pos(pos), _pos_prev(pos), _index(index) {}
 
 void Particle::Move(double dt) {
-    pos = Vec3(0, 0, 0); //pos * 2 - _pos_prev + _gravity * dt * dt;
+    pos = pos * 2 - _pos_prev + _gravity * dt * dt;
 }
