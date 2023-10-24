@@ -3,10 +3,12 @@
 //
 
 #include <threepp/threepp.hpp>
-#include <string>
 
 #include "ThreeppHandler.hpp"
 #include <string>
+
+#include "Vec3.hpp"
+#include "Particle.hpp"
 
 using namespace threepp;
 
@@ -85,19 +87,24 @@ void ThreeppHandler::setWindowResizeListener() {
     });
 }
 
-void ThreeppHandler::setCanvasAnimate(std::vector<int> indices) {
-    _canvas.animate([&] {
+void ThreeppHandler::CanvasAnimateOnce(const std::vector<Particle> &particles, double radius) {
+    _canvas.animateOnce([&] {
+        for (int index = 0; index < _meshVector.size(); index++) {
+            Vec3 pos = particles.at(index).pos;
+            _meshVector.at(index)->position = {static_cast<float>(pos.x), static_cast<float>(pos.y), static_cast<float>(pos.z)};
+        }
 
-        auto dt = _clock.getDelta();
-
-        _renderer.render(*_scene, *_camera);
-        _renderer.resetState(); // needed when using TextRenderer
-        _textRenderer.render();
+        for (int index = _meshVector.size(); index < particles.size(); index++) {
+            Vec3 pos = particles.at(index).pos;
+            addSphere({pos.x, pos.y, pos.z}, radius);
+        }
 
         frameCount++;
         _textHandles.at(0)->setText("Frame " + std::to_string(frameCount));
+        _textHandles.at(1)->setText("Particles: " + std::to_string(particles.size()));
 
-        _meshVector.at(indices.at(0))->position += Vector3(1, 1, 1);
-        _meshVector.at(1)->position -= Vector3(1, 1, 1);
+        _renderer.render(*_scene, *_camera);
+        _renderer.resetState();
+        _textRenderer.render();
     });
 }

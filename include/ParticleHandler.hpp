@@ -25,8 +25,8 @@ public:
     void makeParticle(Vec3 pos);
     void makeParticle(Vec3 pos, Vec3 prev_pos);
     void makeParticle(Vec3 pos, Vec3 vel, double dt);
-    std::vector<Particle> getParticles();
-    double getRadius();
+    std::vector<Particle>& getParticles();
+    double getRadius() const;
 
 private:
     int _antall;

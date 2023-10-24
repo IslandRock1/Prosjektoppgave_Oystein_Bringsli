@@ -15,10 +15,16 @@ Particle::Particle(Vec3 pos, int index)
     : pos(pos), _pos_prev(pos), _index(index) {}
 
 void Particle::Move(double dt) {
+    Vec3 newPrevPos = pos;
     pos = pos * 2 - _pos_prev + _gravity * dt * dt;
+    _pos_prev = newPrevPos;
 }
 
 int Particle::getIndex() const {return _index;}
+
+Vec3 Particle::getPrevPos() {return _pos_prev;}
+
+void Particle::setPrevPos(Vec3 newPos) {_pos_prev = newPos;}
 
 void Particle::reset_Gravity() {_gravity = {0, 0, 0};}
 

@@ -8,7 +8,9 @@
 #include <threepp/threepp.hpp>
 #include <vector>
 #include <string>
+
 #include "Vec3.hpp"
+#include "Particle.hpp"
 
 using namespace threepp;
 
@@ -22,7 +24,7 @@ public:
     int addSphere(Vec3 pos, float radius);
 
     void setWindowResizeListener();
-    void setCanvasAnimate(std::vector<int> indices);
+    void CanvasAnimateOnce(const std::vector<Particle> &particles, double radius);
 
     int frameCount = 0;
 

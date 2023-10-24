@@ -9,20 +9,16 @@ int main() {
 
     ThreeppHandler handler{"Particle Simulator"};
 
-    Vec3 boundingBoxSize = {2, 2, 2};
-    ParticleHandler particleHandler = ParticleHandler(boundingBoxSize, 5, 10);
+    Vec3 boundingBoxSize = {100, 100, 100};
+    ParticleHandler particleHandler = ParticleHandler(boundingBoxSize, 1, 10);
 
-    particleHandler.makeParticle(Vec3(10, 10, 10));
-    particleHandler.makeParticle(Vec3(-10, -10, -10));
+    handler.addText("Frame 0", 0, 0, 1.5);
+    handler.addText("Particles: 0", 0, 20, 1.5);
 
-    std::vector<int> indices;
-    for (Particle &p : particleHandler.getParticles())
+    int maxFrames = 10000;
+    for (int i = 0; i < maxFrames; i++)
     {
-        indices.push_back(handler.addSphere(p.pos, particleHandler.getRadius()));
+        handler.CanvasAnimateOnce(particleHandler.getParticles(), particleHandler.getRadius());
+        particleHandler.step(0.01);
     }
-
-    int ix = handler.addText("Frame 0", 0, 0, 1.5);
-    int ix2 = handler.addText("Particles: 2", 0, 20, 1.5);
-
-    handler.setCanvasAnimate(indices);
 }

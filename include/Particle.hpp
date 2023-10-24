@@ -19,6 +19,9 @@ public:
     void Move(double dt);
     int getIndex() const;
 
+    Vec3 getPrevPos();
+    void setPrevPos(Vec3 newPos);
+
     void reset_Gravity();
     void add_Gravity_Ground(double gravity_strength);
     void add_Gravity_Center(Vec3 center_pos, double gravity_strength);
