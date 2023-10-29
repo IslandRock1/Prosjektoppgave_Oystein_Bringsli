@@ -97,8 +97,18 @@ void ParticleHandler::step(double dt) {
 }
 
 void ParticleHandler::makeParticle() {
-    Vec3 prev = {_startPos.x + 0.1, _startPos.y, _startPos.z};
+    /*Vec3 prev = {_startPos.x + 0.1, _startPos.y, _startPos.z};
     _particles.emplace_back(_startPos, prev, _currentAntall);
+    _currentAntall++;*/
+
+    Vec3 pos = {6, 6, 6};
+    Vec3 prev = {5.9, 5.9, 5.9};
+    _particles.emplace_back(pos, prev, _currentAntall);
+    _currentAntall++;
+
+    pos = {-6, -6, -6};
+    prev = {-5.9, -5.9, -5.9};
+    _particles.emplace_back(pos, prev, _currentAntall);
     _currentAntall++;
 }
 
