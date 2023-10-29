@@ -35,6 +35,9 @@ private:
     std::vector<Particle> _particles;
 
     Vec3 _startPos = {0, 0, 0};
+    int _time_since_last_particle = 0;
+    int _time_between_particles = 60;
+
 
     GravityType _gravityType = GravityType::No_Gravity;
     double _gravityStrength = 0;

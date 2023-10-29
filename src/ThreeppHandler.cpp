@@ -22,7 +22,7 @@ ThreeppHandler::ThreeppHandler(const std::string& title)
 {
     _renderer.setClearColor(Color::black);
 
-    _camera->position.z = 100;
+    _camera->position.z = 200;
     _camera->aspect = _canvas.size().aspect();
     _camera->updateProjectionMatrix();
 

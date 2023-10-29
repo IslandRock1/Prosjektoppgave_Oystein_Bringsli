@@ -127,19 +127,28 @@ void ParticleHandler::step(double dt) {
 }
 
 void ParticleHandler::makeParticle() {
-    /*Vec3 prev = {_startPos.x + 0.1, _startPos.y, _startPos.z};
+    _time_since_last_particle++;
+    if (_time_since_last_particle < _time_between_particles) {return;}
+    _time_since_last_particle = 0;
+
+    double x_speed = 0.1;
+    double y_speed = 0.1;
+    double z_speed = 0.1;
+
+
+    Vec3 prev = {_startPos.x + x_speed, _startPos.y + y_speed, _startPos.z + z_speed};
     _particles.emplace_back(_startPos, prev, _currentAntall);
-    _currentAntall++;*/
-
-    Vec3 pos = {10.0, 0.0, 0.0};
-    Vec3 prev = {10.1, 0.0, 0.0};
-    _particles.emplace_back(pos, prev, _currentAntall);
     _currentAntall++;
 
-    pos = {-10.0, 0.0, 0.0};
-    prev = {-10.1, 0.0, 0.0};
-    _particles.emplace_back(pos, prev, _currentAntall);
-    _currentAntall++;
+//    Vec3 pos = {10.0, 0.0, 0.0};
+//    Vec3 prev = {10.1, 0.0, 0.0};
+//    _particles.emplace_back(pos, prev, _currentAntall);
+//    _currentAntall++;
+//
+//    pos = {-10.0, 0.0, 0.0};
+//    prev = {-10.1, 0.0, 0.0};
+//    _particles.emplace_back(pos, prev, _currentAntall);
+//    _currentAntall++;
 }
 
 void ParticleHandler::makeParticle(Vec3 pos) {
