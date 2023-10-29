@@ -2,6 +2,8 @@
 // Created by Øystein Bringsli on 10/23/2023.
 //
 
+#include <iostream>
+#include <cmath>
 #include "ParticleHandler.hpp"
 
 ParticleHandler::ParticleHandler(Vec3 bounding_box_size, int max_antall, double radius)
@@ -77,6 +79,33 @@ void ParticleHandler::handleWallColl() {
     }
 }
 
+void ParticleHandler::handleCollision() {
+    for (Particle &p0 : _particles) {
+        for (Particle &p1 : _particles) {
+            //Makes sure that collision only happens once between particles
+            if (p1.getIndex() <= p0.getIndex()) { continue;}
+
+            Vec3 axis = p0.pos - p1.pos;
+            double qdist = axis.length_cube();
+
+            if (qdist < (_radius * _radius * 4)) { //qdist => (2r)^2, = 4r^2
+                axis.norm_inline();
+                double delta = (_radius * 2) - std::sqrt(qdist);
+
+                Vec3 dist_to_prev_p0 = p0.pos - p0.getPrevPos();
+                Vec3 dist_to_prev_p1 = p1.pos - p1.getPrevPos();
+
+                p0.pos += axis * 0.5 * delta;
+                p1.pos -= axis * 0.5 * delta;
+
+                p0.setPrevPos(p0.pos + dist_to_prev_p0);
+                p1.setPrevPos(p1.pos + dist_to_prev_p1);
+
+            }
+        }
+    }
+}
+
 void ParticleHandler::step(double dt) {
 
     for (int current_substep = 0; current_substep < _substeps; current_substep++) {
@@ -84,6 +113,7 @@ void ParticleHandler::step(double dt) {
 
         handleWallColl();
 
+        handleCollision();
         //Collision check and calculation here
 
         for (Particle &p : _particles) {
@@ -101,13 +131,13 @@ void ParticleHandler::makeParticle() {
     _particles.emplace_back(_startPos, prev, _currentAntall);
     _currentAntall++;*/
 
-    Vec3 pos = {6, 6, 6};
-    Vec3 prev = {5.9, 5.9, 5.9};
+    Vec3 pos = {10.0, 0.0, 0.0};
+    Vec3 prev = {10.1, 0.0, 0.0};
     _particles.emplace_back(pos, prev, _currentAntall);
     _currentAntall++;
 
-    pos = {-6, -6, -6};
-    prev = {-5.9, -5.9, -5.9};
+    pos = {-10.0, 0.0, 0.0};
+    prev = {-10.1, 0.0, 0.0};
     _particles.emplace_back(pos, prev, _currentAntall);
     _currentAntall++;
 }

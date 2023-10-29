@@ -44,6 +44,7 @@ private:
 
     void addGravity();
     void handleWallColl();
+    void handleCollision();
 };
 
 
