@@ -12,6 +12,7 @@ Update. As of 30.10.23 the project is runnable. The configuration of particle sp
     Implement better searching algorithm for particle collisions
     Make a better readme
     General cleanup and user excperience/configuring
+    Implement a way to save picture/video that scales when simuation can not run at 60 FPS
 
 ### How to build?
 This simulation uses threepp to render.
