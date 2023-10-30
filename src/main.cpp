@@ -7,13 +7,13 @@ using namespace threepp;
 
 int main() {
 
-    ThreeppHandler handler{"Particle Simulator"};
+    Vec3 boundingBoxSize = {1000, 1000, 1000};
+    ParticleHandler particleHandler = ParticleHandler(boundingBoxSize, 10, 25);
 
-    Vec3 boundingBoxSize = {500, 500, 500};
-    ParticleHandler particleHandler = ParticleHandler(boundingBoxSize, 100, 5);
+    ThreeppHandler handler{"Particle Simulator", particleHandler};
 
     handler.addText("Frame 0", 0, 0, 1.5);
     handler.addText("Particles: 0", 0, 20, 1.5);
 
-    handler.CanvasAnimate(particleHandler);
+    handler.CanvasAnimate();
 }

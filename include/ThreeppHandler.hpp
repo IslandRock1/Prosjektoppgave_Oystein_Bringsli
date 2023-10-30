@@ -17,7 +17,7 @@ using namespace threepp;
 
 class ThreeppHandler {
 public:
-    ThreeppHandler(const std::string& title);
+    ThreeppHandler(const std::string& title, ParticleHandler &particleHandler);
     int addText(const std::string& label, int x, int y, float scale);
 
     int addCircle(float radius, int segments = 32);
@@ -25,7 +25,7 @@ public:
     int addSphere(Vec3 pos, float radius);
 
     void setWindowResizeListener();
-    void CanvasAnimate(ParticleHandler &particleHandler);
+    void CanvasAnimate();
     void CanvasAnimateOnce(const std::vector<Particle> &particles, double radius);
 
     int frameCount = 0;
@@ -42,6 +42,7 @@ private:
     std::vector<TextHandle*> _textHandles;
     std::vector<std::shared_ptr<Mesh>> _meshVector;
 
+    ParticleHandler &_particleHandler;
     bool _maxCapasity = false;
 };
 

@@ -57,7 +57,8 @@ void ParticleHandler::handleWallColl() {
             Vec3 prevPos = p.getPrevPos();
             double distToPrevPos = p.pos.x - prevPos.x;
             p.pos.x = (_bounding_box.x - _radius) * ((p.pos.x > 0) - (p.pos.x < 0));
-            prevPos.x = p.pos.x  + distToPrevPos;
+            prevPos.x = p.pos.x  + distToPrevPos * _friction;
+
             p.setPrevPos(prevPos);
         }
 
@@ -66,7 +67,7 @@ void ParticleHandler::handleWallColl() {
             Vec3 prevPos = p.getPrevPos();
             double distToPrevPos = p.pos.y - prevPos.y;
             p.pos.y = (_bounding_box.y - _radius) * ((p.pos.y > 0) - (p.pos.y < 0));
-            prevPos.y = p.pos.y  + distToPrevPos;
+            prevPos.y = p.pos.y  + distToPrevPos * _friction;
             p.setPrevPos(prevPos);
         }
 
@@ -75,7 +76,7 @@ void ParticleHandler::handleWallColl() {
             Vec3 prevPos = p.getPrevPos();
             double distToPrevPos = p.pos.z - prevPos.z;
             p.pos.z = (_bounding_box.z - _radius) * ((p.pos.z > 0) - (p.pos.z < 0));
-            prevPos.z = p.pos.z  + distToPrevPos;
+            prevPos.z = p.pos.z  + distToPrevPos * _friction;
             p.setPrevPos(prevPos);
         }
     }
@@ -84,7 +85,9 @@ void ParticleHandler::handleWallColl() {
 void ParticleHandler::handleCollision() {
     for (Particle &p0 : _particles) {
         for (Particle &p1 : _particles) {
+
             //Makes sure that collision only happens once between particles
+            //This loop will be further optimized in the future. O(n^2) is not optimal
             if (p1.getIndex() <= p0.getIndex()) { continue;}
 
             Vec3 axis = p0.pos - p1.pos;
@@ -154,16 +157,6 @@ void ParticleHandler::makeParticle() {
     Vec3 prev = {_startPos.x + x_speed, _startPos.y + y_speed, _startPos.z + z_speed};
     _particles.emplace_back(_startPos, prev, _currentAntall);
     _currentAntall++;
-
-//    Vec3 pos = {10.0, 0.0, 0.0};
-//    Vec3 prev = {10.1, 0.0, 0.0};
-//    _particles.emplace_back(pos, prev, _currentAntall);
-//    _currentAntall++;
-//
-//    pos = {-10.0, 0.0, 0.0};
-//    prev = {-10.1, 0.0, 0.0};
-//    _particles.emplace_back(pos, prev, _currentAntall);
-//    _currentAntall++;
 }
 
 void ParticleHandler::makeParticle(Vec3 pos) {
@@ -187,4 +180,8 @@ std::vector<Particle>& ParticleHandler::getParticles() {
 
 double ParticleHandler::getRadius() const {
     return _radius;
+}
+
+Vec3 ParticleHandler::getBounding() const {
+    return _bounding_box;
 }

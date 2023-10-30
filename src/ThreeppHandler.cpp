@@ -13,17 +13,19 @@
 
 using namespace threepp;
 
-ThreeppHandler::ThreeppHandler(const std::string& title)
+ThreeppHandler::ThreeppHandler(const std::string& title, ParticleHandler &particleHandler)
     :_canvas(title, {{"aa", 4}}),
       _renderer(_canvas.size()),
       _camera(PerspectiveCamera::create()),
       _scene(Scene::create()),
-      _controls(*_camera, _canvas)
+      _controls(*_camera, _canvas),
+      _particleHandler(particleHandler)
 
 {
     _renderer.setClearColor(Color::black);
 
-    _camera->position.z = 200;
+    auto bound_size = std::max(_particleHandler.getBounding().x, _particleHandler.getBounding().y);
+    _camera->position.z = bound_size * 3.0;
     _camera->aspect = _canvas.size().aspect();
     _camera->updateProjectionMatrix();
 
@@ -88,16 +90,12 @@ void ThreeppHandler::setWindowResizeListener() {
     });
 }
 
-void ThreeppHandler::CanvasAnimate(ParticleHandler& particleHandler) {
+void ThreeppHandler::CanvasAnimate() {
     _canvas.animate([&] {
         auto dt = _clock.getDelta();
-        //std::cout << "dt: " << dt << "\n";
+        _particleHandler.step(0.01, _maxCapasity);
 
-        //Added mesh vector constraint because first frame returns a dt way above normal amount.
-        //if ((dt > (1.0 / 30.0)) and (_meshVector.size() > 1)) {_maxCapasity = true;} //Stops making particles when fps gets below 50
-        particleHandler.step(0.01, _maxCapasity);
-
-        auto &particles = particleHandler.getParticles();
+        auto &particles = _particleHandler.getParticles();
 
         for (int index = 0; index < _meshVector.size(); index++) {
             Vec3 pos = particles.at(index).pos;
@@ -106,7 +104,7 @@ void ThreeppHandler::CanvasAnimate(ParticleHandler& particleHandler) {
 
         for (int index = _meshVector.size(); index < particles.size(); index++) {
             Vec3 pos = particles.at(index).pos;
-            addSphere({pos.x, pos.y, pos.z}, particleHandler.getRadius());
+            addSphere({pos.x, pos.y, pos.z}, _particleHandler.getRadius());
         }
 
         frameCount++;

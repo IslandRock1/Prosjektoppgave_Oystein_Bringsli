@@ -28,6 +28,7 @@ public:
     void makeParticle(Vec3 pos, Vec3 vel, double dt);
     std::vector<Particle>& getParticles();
     double getRadius() const;
+    Vec3 getBounding() const;
 
 private:
     int _antall;
@@ -41,7 +42,10 @@ private:
     int _time_between_particles = 10;
 
     GravityType _gravityType = GravityType::Ground;
-    double _gravityStrength = 1;
+
+    //Random ass numbers, looks decent
+    double _gravityStrength = 1000;
+    double _friction = 0.95; //speed *= _friction
 
     Vec3 _bounding_box;
     int _substeps = 8;
