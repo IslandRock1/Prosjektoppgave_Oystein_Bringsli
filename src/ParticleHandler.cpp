@@ -109,7 +109,7 @@ void ParticleHandler::handleCollision() {
     }
 }
 
-void ParticleHandler::step(double dt) {
+void ParticleHandler::step(double dt, bool max_capasity) {
 
     for (int current_substep = 0; current_substep < _substeps; current_substep++) {
         addGravity();
@@ -123,8 +123,10 @@ void ParticleHandler::step(double dt) {
         }
     }
 
-    if (_currentAntall < _antall) {
-        makeParticle();
+    if (! max_capasity) {
+        if (_currentAntall < _antall) {
+            makeParticle();
+        }
     }
 }
 

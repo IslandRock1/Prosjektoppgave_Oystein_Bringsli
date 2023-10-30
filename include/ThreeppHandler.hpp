@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 
+#include "ParticleHandler.hpp"
 #include "Vec3.hpp"
 #include "Particle.hpp"
 
@@ -24,6 +25,7 @@ public:
     int addSphere(Vec3 pos, float radius);
 
     void setWindowResizeListener();
+    void CanvasAnimate(ParticleHandler &particleHandler);
     void CanvasAnimateOnce(const std::vector<Particle> &particles, double radius);
 
     int frameCount = 0;
@@ -39,6 +41,8 @@ private:
     TextRenderer _textRenderer;
     std::vector<TextHandle*> _textHandles;
     std::vector<std::shared_ptr<Mesh>> _meshVector;
+
+    bool _maxCapasity = false;
 };
 
 #endif//PROSJEKTOPPGAVE_OYSTEIN_BRINGSLI_THREEPPHANDLER_HPP

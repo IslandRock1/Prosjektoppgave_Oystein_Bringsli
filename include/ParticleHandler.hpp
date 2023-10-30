@@ -21,7 +21,7 @@ class ParticleHandler {
 public:
     ParticleHandler(Vec3 bounding_box_size, int max_antall, double radius);
 
-    void step(double dt);
+    void step(double dt, bool max_capacity = false);
     void makeParticle();
     void makeParticle(Vec3 pos);
     void makeParticle(Vec3 pos, Vec3 prev_pos);
@@ -38,10 +38,10 @@ private:
     Vec3 _startPos = {0, 0, 0};
     double _minSpeed = 0.1;
     int _time_since_last_particle = 0;
-    int _time_between_particles = 60;
+    int _time_between_particles = 10;
 
-    GravityType _gravityType = GravityType::No_Gravity;
-    double _gravityStrength = 0;
+    GravityType _gravityType = GravityType::Ground;
+    double _gravityStrength = 1;
 
     Vec3 _bounding_box;
     int _substeps = 8;
