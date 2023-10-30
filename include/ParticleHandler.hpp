@@ -1,5 +1,5 @@
 //
-// Created by Øystein Bringsli on 10/23/2023.
+// Created by Øystein Bringsli on 23/10/2023.
 //
 
 #ifndef PROSJEKTOPPGAVE_OYSTEIN_BRINGSLI_PARTICLEHANDLER_HPP
@@ -13,8 +13,8 @@
 enum GravityType {
     Between_Objects = 1,
     Center = 2,
-    Ground = 3,
-    No_Gravity = 4
+    Ground = 3
+    //No_Gravity = 4
 };
 
 class ParticleHandler {

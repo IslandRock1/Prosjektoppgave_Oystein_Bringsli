@@ -1,5 +1,5 @@
 //
-// Created by Øystein Bringsli on 10/5/2023.
+// Created by Øystein Bringsli on 5/10/2023.
 //
 
 #ifndef PROSJEKTOPPGAVE_OYSTEIN_BRINGSLI_THREEPPHANDLER_HPP
@@ -20,13 +20,12 @@ public:
     ThreeppHandler(const std::string& title, ParticleHandler &particleHandler);
     int addText(const std::string& label, int x, int y, float scale);
 
+    //Potentially used in future for 2D physics.
     int addCircle(float radius, int segments = 32);
-    int addSphere(float radius);
     int addSphere(Vec3 pos, float radius);
 
     void setWindowResizeListener();
     void CanvasAnimate();
-    void CanvasAnimateOnce(const std::vector<Particle> &particles, double radius);
 
     int frameCount = 0;
 
@@ -44,7 +43,7 @@ private:
     std::vector<TextHandle*> _textHandles;
 
     //Should be called something along the lines of "particleMeshes" or whatever
-    std::vector<std::shared_ptr<Mesh>> _meshVector;
+    std::vector<std::shared_ptr<Mesh>> _particleMeshes;
 
     ParticleHandler &_particleHandler;
     bool _maxCapasity = false;

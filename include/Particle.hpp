@@ -1,5 +1,5 @@
 //
-// Created by Øystein Bringsli on 10/17/2023.
+// Created by Øystein Bringsli on 17/10/2023.
 //
 
 #ifndef PROSJEKTOPPGAVE_OYSTEIN_BRINGSLI_PARTICLE_HPP
@@ -32,8 +32,10 @@ private:
     Vec3 _gravity = {0, 0, 0};
 
     int _index;
-    bool coll_this_frame = false;
-    std::array<bool, 100> _past_collision = {false};
+
+    //To be used later for a more visually stimulating friction between objects. (Aka, not physically based)
+    //bool coll_this_frame = false;
+    //std::array<bool, 100> _past_collision = {false};
 };
 
 

@@ -1,12 +1,12 @@
 //
-// Created by Øystein Bringsli on 10/5/2023.
+// Created by Øystein Bringsli on 5/10/2023.
 //
 
 #include <threepp/threepp.hpp>
 
 #include "ThreeppHandler.hpp"
 #include <string>
-#include <iostream>
+#include <chrono>
 
 #include "Vec3.hpp"
 #include "Particle.hpp"
@@ -62,22 +62,10 @@ int ThreeppHandler::addCircle(float radius, int segments) {
     material->color.copy(Color::aliceblue);
     auto mesh = Mesh::create(geometry, material);
 
-    _meshVector.push_back(mesh);
+    _particleMeshes.push_back(mesh);
     _scene->add(mesh);
 
-    return _meshVector.size() - 1;
-}
-
-int ThreeppHandler::addSphere(float radius) {
-    auto geometry = SphereGeometry::create(radius);
-    auto material = MeshBasicMaterial::create();
-    material->color.copy(Color::green);
-    auto mesh = Mesh::create(geometry, material);
-
-    _meshVector.push_back(mesh);
-    _scene->add(mesh);
-
-    return _meshVector.size() - 1;
+    return _particleMeshes.size() - 1;
 }
 
 int ThreeppHandler::addSphere(Vec3 pos, float radius) {
@@ -97,10 +85,10 @@ int ThreeppHandler::addSphere(Vec3 pos, float radius) {
     auto mesh = Mesh::create(geometry, material);
     mesh->position = Vector3(pos.x, pos.y, pos.z);
 
-    _meshVector.push_back(mesh);
+    _particleMeshes.push_back(mesh);
     _scene->add(mesh);
 
-    return _meshVector.size() - 1;
+    return _particleMeshes.size() - 1;
 }
 
 void ThreeppHandler::setWindowResizeListener() {
@@ -113,51 +101,30 @@ void ThreeppHandler::setWindowResizeListener() {
 
 void ThreeppHandler::CanvasAnimate() {
     _canvas.animate([&] {
-        auto dt = _clock.getDelta();
+        auto t0 = std::chrono::high_resolution_clock::now();
         _particleHandler.step(0.01, _maxCapasity);
+        auto t1 = std::chrono::high_resolution_clock::now();
+        auto dt = static_cast<double>(std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count());
 
         auto &particles = _particleHandler.getParticles();
 
-        for (int index = 0; index < _meshVector.size(); index++) {
+        for (int index = 0; index < _particleMeshes.size(); index++) {
             Vec3 pos = particles.at(index).pos;
-            _meshVector.at(index)->position = {static_cast<float>(pos.x), static_cast<float>(pos.y), static_cast<float>(pos.z)};
+            _particleMeshes.at(index)->position = {static_cast<float>(pos.x), static_cast<float>(pos.y), static_cast<float>(pos.z)};
         }
 
-        for (int index = _meshVector.size(); index < particles.size(); index++) {
+        for (int index = _particleMeshes.size(); index < particles.size(); index++) {
             Vec3 pos = particles.at(index).pos;
             addSphere({pos.x, pos.y, pos.z}, _particleHandler.getRadius());
         }
 
         frameCount++;
-        auto fps = static_cast<int>(1.0 / dt);
+        auto fps = static_cast<int>(1000000.0 / dt);
+        //Allocates 50% of time to particle collisions, and rest to rendering
+        if (fps < 120.0) {_maxCapasity = true;}
 
         //Mostly for debugging
-        _textHandles.at(0)->setText("Frame " + std::to_string(frameCount) + " | FPS: " + std::to_string((fps)) + " | dt: " + std::to_string(static_cast<int>(dt * 1000.0)));
-        _textHandles.at(1)->setText("Particles: " + std::to_string(particles.size()));
-
-        _renderer.render(*_scene, *_camera);
-        _renderer.resetState();
-        _textRenderer.render();
-    });
-}
-
-void ThreeppHandler::CanvasAnimateOnce(const std::vector<Particle> &particles, double radius) {
-    _canvas.animateOnce([&] {
-        for (int index = 0; index < _meshVector.size(); index++) {
-            Vec3 pos = particles.at(index).pos;
-            _meshVector.at(index)->position = {static_cast<float>(pos.x), static_cast<float>(pos.y), static_cast<float>(pos.z)};
-        }
-
-        for (int index = _meshVector.size(); index < particles.size(); index++) {
-            Vec3 pos = particles.at(index).pos;
-            addSphere({pos.x, pos.y, pos.z}, radius);
-        }
-
-        frameCount++;
-        auto dt = _clock.getDelta();
-        auto fps = static_cast<int>(1000.0 / dt);
-
-        _textHandles.at(0)->setText("Frame " + std::to_string(frameCount) + " | FPS: " + std::to_string((fps)));
+        _textHandles.at(0)->setText("Frame " + std::to_string(frameCount) + " | FPS: " + std::to_string((fps)) + " | dt: " + std::to_string(static_cast<int>(dt / 1000.0)) + "ms");
         _textHandles.at(1)->setText("Particles: " + std::to_string(particles.size()));
 
         _renderer.render(*_scene, *_camera);

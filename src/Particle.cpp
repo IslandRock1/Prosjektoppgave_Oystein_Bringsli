@@ -16,6 +16,7 @@ Particle::Particle(Vec3 pos, int index)
 
 void Particle::Move(double dt) {
     Vec3 newPrevPos = pos;
+    //Uses verlet integration instead of eulers method for higher accuracy
     pos = pos * 2 - _pos_prev + _gravity * dt * dt;
     _pos_prev = newPrevPos;
 }

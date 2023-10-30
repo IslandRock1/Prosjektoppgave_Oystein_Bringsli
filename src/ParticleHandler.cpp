@@ -5,7 +5,6 @@
 #include <iostream>
 #include <cmath>
 #include <random>
-#include <iostream>
 #include "ParticleHandler.hpp"
 
 ParticleHandler::ParticleHandler(Vec3 bounding_box_size, int max_antall, double radius)
@@ -54,6 +53,8 @@ void ParticleHandler::addGravity() {
 void ParticleHandler::handleWallColl() {
     for (Particle &p : _particles)
     {
+        //Could be separate functions, maybe a single function too
+        //But would need to know witch axis hits the wall
         if (((p.pos.x - _radius) < (-_bounding_box.x)) or ((p.pos.x + _radius) > _bounding_box.x))
         {
             Vec3 prevPos = p.getPrevPos();
@@ -156,6 +157,8 @@ void ParticleHandler::makeParticle() {
     y_speed *= static_cast<double>(random_bool(rng)) * 2.0 - 1.0;
     z_speed *= static_cast<double>(random_bool(rng)) * 2.0 - 1.0;
 
+
+    //Creates a random speed, with random direction.
     Vec3 prev = {_startPos.x + x_speed, _startPos.y + y_speed, _startPos.z + z_speed};
     _particles.emplace_back(_startPos, prev, _currentAntall);
     _currentAntall++;
