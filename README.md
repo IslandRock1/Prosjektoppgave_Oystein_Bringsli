@@ -5,9 +5,16 @@ The project is largely based on a previous project of mine for a similar simulat
 
 ### Current state
 As of 10.10.23 the project is still in the start phase, and not ready to be used.
+Update. As of 30.10.23 the project is runnable. The configuration of particle spawn is very poorly designed currently, but will be better shortly.
+
+### Todo:
+    Fix border / Outline
+    Implement better searching algorithm for particle collisions
+    Make a better readme
+    General cleanup and user excperience/configuring
 
 ### How to build?
 This simulation uses threepp to render.
 
 ### Notes on implementation
-This simulation is built to act as an 80% physicly based simulation, and 20% visually belivable/pleasing. This means that some of the friction and gravity calculation will not be 100% physicly accurate. This simulation also uses verlet integration, witch is also not perfectly accurate.
+This simulation is built to act as an 80% physically based simulation, and 20% visually belivable/pleasing. This means that some of the friction and gravity calculation will not be 100% physicly accurate. This simulation also uses verlet integration, witch is also not perfectly accurate.

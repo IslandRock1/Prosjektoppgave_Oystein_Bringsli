@@ -34,6 +34,17 @@ ThreeppHandler::ThreeppHandler(const std::string& title, ParticleHandler &partic
         _camera->updateProjectionMatrix();
         _renderer.setSize(size);
     });
+
+    _drawBorder();
+}
+
+void ThreeppHandler::_drawBorder() {
+    //Not happy with this. Going to look over the boid example to see how Lars did it later.
+    auto boxGeo = BoxGeometry::create(100, 100, 100);
+    auto material = MeshBasicMaterial::create();
+    material->wireframe = true;
+    auto mesh = Mesh::create(boxGeo, material);
+    _scene->add(mesh);
 }
 
 int ThreeppHandler::addText(const std::string& label, int x, int y, float scale) {

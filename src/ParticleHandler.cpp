@@ -144,10 +144,10 @@ void ParticleHandler::makeParticle() {
     std::uniform_int_distribution<std::mt19937::result_type> random(0,1000);
     std::uniform_int_distribution<std::mt19937::result_type> random_bool(0, 1);
 
-    //rand => [0, 1000] | / 1000.0 => [0, 1.0]
-    double x_speed = std::max(static_cast<double>(random(rng)) / 1000.0, _minSpeed);
-    double y_speed = std::max(static_cast<double>(random(rng)) / 1000.0, _minSpeed);
-    double z_speed = std::max(static_cast<double>(random(rng)) / 1000.0, _minSpeed);
+    //rand => [0, 1000] | / 10000.0 => [0, 0.1]
+    double x_speed = std::max(static_cast<double>(random(rng)) / 10000.0, _minSpeed);
+    double y_speed = std::max(static_cast<double>(random(rng)) / 10000.0, _minSpeed);
+    double z_speed = std::max(static_cast<double>(random(rng)) / 10000.0, _minSpeed);
 
     //[0, 1] * 2 => [0, 2] | -1 => [-1, 1]
     x_speed *= static_cast<double>(random_bool(rng)) * 2.0 - 1.0;

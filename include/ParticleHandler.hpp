@@ -37,7 +37,7 @@ private:
     std::vector<Particle> _particles;
 
     Vec3 _startPos = {0, 0, 0};
-    double _minSpeed = 0.1;
+    double _minSpeed = 0.01;
     int _time_since_last_particle = 0;
     int _time_between_particles = 10;
 

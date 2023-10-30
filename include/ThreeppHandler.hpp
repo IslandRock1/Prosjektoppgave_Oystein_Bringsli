@@ -38,8 +38,12 @@ private:
     OrbitControls _controls;
     Clock _clock;
 
+    void _drawBorder();
+
     TextRenderer _textRenderer;
     std::vector<TextHandle*> _textHandles;
+
+    //Should be called something along the lines of "particleMeshes" or whatever
     std::vector<std::shared_ptr<Mesh>> _meshVector;
 
     ParticleHandler &_particleHandler;
