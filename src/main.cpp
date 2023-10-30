@@ -9,7 +9,7 @@ int main() {
 
     ThreeppHandler handler{"Particle Simulator"};
 
-    Vec3 boundingBoxSize = {100, 100, 100};
+    Vec3 boundingBoxSize = {500, 500, 500};
     ParticleHandler particleHandler = ParticleHandler(boundingBoxSize, 5, 5);
 
     handler.addText("Frame 0", 0, 0, 1.5);

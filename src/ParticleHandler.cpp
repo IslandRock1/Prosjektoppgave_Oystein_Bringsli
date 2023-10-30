@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include <cmath>
+#include <random>
+#include <iostream>
 #include "ParticleHandler.hpp"
 
 ParticleHandler::ParticleHandler(Vec3 bounding_box_size, int max_antall, double radius)
@@ -59,7 +61,7 @@ void ParticleHandler::handleWallColl() {
             p.setPrevPos(prevPos);
         }
 
-        if ((p.pos.y < _bounding_box.y) or (p.pos.y > _bounding_box.y))
+        if (((p.pos.y - _radius) < (-_bounding_box.y)) or ((p.pos.y + _radius) > _bounding_box.y))
         {
             Vec3 prevPos = p.getPrevPos();
             double distToPrevPos = p.pos.y - prevPos.y;
@@ -68,7 +70,7 @@ void ParticleHandler::handleWallColl() {
             p.setPrevPos(prevPos);
         }
 
-        if ((p.pos.z < _bounding_box.z) or (p.pos.z > _bounding_box.z))
+        if (((p.pos.z - _radius) < (-_bounding_box.z)) or ((p.pos.z + _radius) > _bounding_box.z))
         {
             Vec3 prevPos = p.getPrevPos();
             double distToPrevPos = p.pos.z - prevPos.z;
@@ -98,8 +100,9 @@ void ParticleHandler::handleCollision() {
                 p0.pos += axis * 0.5 * delta;
                 p1.pos -= axis * 0.5 * delta;
 
-                p0.setPrevPos(p0.pos + dist_to_prev_p0);
-                p1.setPrevPos(p1.pos + dist_to_prev_p1);
+                //Changes speed based on the law of preservation of momentum
+                p0.setPrevPos(p0.pos - dist_to_prev_p1);
+                p1.setPrevPos(p1.pos - dist_to_prev_p0);
 
             }
         }
@@ -114,7 +117,6 @@ void ParticleHandler::step(double dt) {
         handleWallColl();
 
         handleCollision();
-        //Collision check and calculation here
 
         for (Particle &p : _particles) {
             p.Move(dt / _substeps);
@@ -127,14 +129,25 @@ void ParticleHandler::step(double dt) {
 }
 
 void ParticleHandler::makeParticle() {
+    //Makes sure the particles does not spawn in on top of eachother
     _time_since_last_particle++;
     if (_time_since_last_particle < _time_between_particles) {return;}
     _time_since_last_particle = 0;
 
-    double x_speed = 0.1;
-    double y_speed = 0.1;
-    double z_speed = 0.1;
+    std::random_device dev;
+    std::mt19937 rng(dev());
+    std::uniform_int_distribution<std::mt19937::result_type> random(0,1000);
+    std::uniform_int_distribution<std::mt19937::result_type> random_bool(0, 1);
 
+    //rand => [0, 1000] | / 1000.0 => [0, 1.0]
+    double x_speed = std::max(static_cast<double>(random(rng)) / 1000.0, _minSpeed);
+    double y_speed = std::max(static_cast<double>(random(rng)) / 1000.0, _minSpeed);
+    double z_speed = std::max(static_cast<double>(random(rng)) / 1000.0, _minSpeed);
+
+    //[0, 1] * 2 => [0, 2] | -1 => [-1, 1]
+    x_speed *= static_cast<double>(random_bool(rng)) * 2.0 - 1.0;
+    y_speed *= static_cast<double>(random_bool(rng)) * 2.0 - 1.0;
+    z_speed *= static_cast<double>(random_bool(rng)) * 2.0 - 1.0;
 
     Vec3 prev = {_startPos.x + x_speed, _startPos.y + y_speed, _startPos.z + z_speed};
     _particles.emplace_back(_startPos, prev, _currentAntall);
