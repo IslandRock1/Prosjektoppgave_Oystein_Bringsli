@@ -83,7 +83,17 @@ int ThreeppHandler::addSphere(float radius) {
 int ThreeppHandler::addSphere(Vec3 pos, float radius) {
     auto geometry = SphereGeometry::create(radius);
     auto material = MeshBasicMaterial::create();
-    material->color.copy(Color::green);
+
+    std::random_device dev;
+    std::mt19937 rng(dev());
+    std::uniform_int_distribution<std::mt19937::result_type> random(0,255);
+
+    auto r = static_cast<float>(random(rng)) / 255.0f;
+    auto g = static_cast<float>(random(rng)) / 255.0f;
+    auto b = static_cast<float>(random(rng)) / 255.0f;
+
+    material->color.setRGB(r, g, b);
+
     auto mesh = Mesh::create(geometry, material);
     mesh->position = Vector3(pos.x, pos.y, pos.z);
 

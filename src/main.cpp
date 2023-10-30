@@ -8,7 +8,7 @@ using namespace threepp;
 int main() {
 
     Vec3 boundingBoxSize = {100, 100, 100};
-    ParticleHandler particleHandler = ParticleHandler(boundingBoxSize, 100, 2.5);
+    ParticleHandler particleHandler = ParticleHandler(boundingBoxSize, 100, 5);
 
     ThreeppHandler handler{"Particle Simulator", particleHandler};
 

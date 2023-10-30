@@ -9,7 +9,9 @@
 #include "ParticleHandler.hpp"
 
 ParticleHandler::ParticleHandler(Vec3 bounding_box_size, int max_antall, double radius)
-    : _bounding_box(bounding_box_size / 2), _antall(max_antall), _radius(radius) {}
+    : _bounding_box(bounding_box_size / 2), _antall(max_antall), _radius(radius) {
+    _startPos.y = _bounding_box.y * 0.8;
+}
 
 void ParticleHandler::addGravity() {
     for (Particle &p : _particles)
