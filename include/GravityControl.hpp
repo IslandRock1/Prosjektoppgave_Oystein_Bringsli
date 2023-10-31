@@ -6,28 +6,27 @@
 #include <optional>
 
 #include "Vec3.hpp"
-#include "Particle.hpp"
 
 #ifndef PROSJEKTOPPGAVE_OYSTEIN_BRINGSLI_GRAVITYCONTROL_HPP
 #define PROSJEKTOPPGAVE_OYSTEIN_BRINGSLI_GRAVITYCONTROL_HPP
 
 enum GravityType {
-    Between_Objects = 1,
-    Center = 2,
-    Ground = 3
-    //No_Gravity = 4
+    Ground = 0,
+    Center = 1,
+    BetweenObjects = 2
 };
 
 class GravityControl {
 public:
     Vec3 pos = {0, 0, 0};
 
-    GravityControl(const GravityType &type);
+    GravityControl();
+    GravityControl(const Vec3 &pos);
 
     void resetGravity();
-    std::function<void(const double &GravityStrength, const Particle& other)> addGravity;
+    void addGravity(const double &GravityStrength, const GravityType &type, const GravityControl &other = GravityControl());
 
-private:
+protected:
     Vec3 _gravity = {0, 0, 0};
 };
 

@@ -15,38 +15,25 @@ ParticleHandler::ParticleHandler(Vec3 bounding_box_size, int max_antall, double 
 void ParticleHandler::addGravity() {
     for (Particle &p : _particles)
     {
-        p.reset_Gravity();
+        p.resetGravity();
     }
 
-    switch (_gravityType) {
-        case GravityType::Center:
+    if (_gravityType == GravityType::BetweenObjects)
+    {
+        for (Particle &p0 : _particles)
         {
-            for (Particle &p : _particles)
+            for (Particle &p1 : _particles)
             {
-                p.add_Gravity_Center({0, 0, 0}, _gravityStrength);
-            }
-        } break;
+                if (p0.getIndex() >= p1.getIndex()) { continue;}
 
-        case GravityType::Ground:
-        {
-            for (Particle &p : _particles)
-            {
-                p.add_Gravity_Ground(_gravityStrength);
+                p0.addGravity(_gravityStrength, _gravityType, p1);
+                p1.addGravity(_gravityStrength, _gravityType, p0);
             }
-        } break;
-
-        case GravityType::Between_Objects:
-        {
-            for (Particle &p0 : _particles)
-            {
-                for (Particle &p1 : _particles)
-                {
-                    if (p0.getIndex() == p1.getIndex()) { continue;}
-                    p0.add_Gravity_Between(p1, _gravityStrength);
-                }
-            }
-        } break;
-            //Ignores default as the only remaining option is No Gravity.
+        }
+    } else {
+        for (Particle& p : _particles) {
+            p.addGravity(_gravityStrength, _gravityType);
+        }
     }
 }
 
@@ -107,8 +94,8 @@ void ParticleHandler::handleCollision() {
                 p1.pos -= axis * 0.5 * delta;
 
                 //Changes speed based on the law of preservation of momentum
-                p0.setPrevPos(p0.pos - dist_to_prev_p1);
-                p1.setPrevPos(p1.pos - dist_to_prev_p0);
+                p0.setPrevPos(p0.pos - dist_to_prev_p1 * _friction);
+                p1.setPrevPos(p1.pos - dist_to_prev_p0 * _friction);
 
             }
         }
@@ -137,7 +124,7 @@ void ParticleHandler::step(double dt, bool max_capasity) {
 }
 
 void ParticleHandler::makeParticle() {
-    //Makes sure the particles does not spawn in on top of eachother
+    //Makes sure the particles does not spawn in on top of each-other
     _time_since_last_particle++;
     if (_time_since_last_particle < _time_between_particles) {return;}
     _time_since_last_particle = 0;
@@ -160,22 +147,7 @@ void ParticleHandler::makeParticle() {
 
     //Creates a random speed, with random direction.
     Vec3 prev = {_startPos.x + x_speed, _startPos.y + y_speed, _startPos.z + z_speed};
-    _particles.emplace_back(_startPos, prev, _currentAntall);
-    _currentAntall++;
-}
-
-void ParticleHandler::makeParticle(Vec3 pos) {
-    _particles.emplace_back(pos, _currentAntall);
-    _currentAntall++;
-}
-
-void ParticleHandler::makeParticle(Vec3 pos, Vec3 prev_pos) {
-    _particles.emplace_back(pos, prev_pos, _currentAntall);
-    _currentAntall++;
-}
-
-void ParticleHandler::makeParticle(Vec3 pos, Vec3 vel, double dt) {
-    _particles.emplace_back(pos, vel, dt, _currentAntall);
+    _particles.emplace_back(_startPos, prev, _currentAntall, _gravityType);
     _currentAntall++;
 }
 
@@ -190,3 +162,9 @@ double ParticleHandler::getRadius() const {
 Vec3 ParticleHandler::getBounding() const {
     return _bounding_box;
 }
+
+void ParticleHandler::setMinSpeed(const double& speed) {_minSpeed = speed;}
+void ParticleHandler::setTimeBetweenParticles(const int& time) {_time_between_particles = time;}
+void ParticleHandler::setGravityType(const GravityType& type) {_gravityType = type;}
+void ParticleHandler::setGravityStrength(const double& strenght) {_gravityStrength = strenght;}
+void ParticleHandler::setFriction(const double& friction) {_friction = friction;}

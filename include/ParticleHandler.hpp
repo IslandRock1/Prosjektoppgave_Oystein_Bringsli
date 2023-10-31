@@ -10,25 +10,21 @@
 #include <random>
 #include "Particle.hpp"
 
-enum GravityType {
-    Between_Objects = 1,
-    Center = 2,
-    Ground = 3
-    //No_Gravity = 4
-};
-
 class ParticleHandler {
 public:
     ParticleHandler(Vec3 bounding_box_size, int max_antall, double radius);
 
     void step(double dt, bool max_capacity = false);
     void makeParticle();
-    void makeParticle(Vec3 pos);
-    void makeParticle(Vec3 pos, Vec3 prev_pos);
-    void makeParticle(Vec3 pos, Vec3 vel, double dt);
     std::vector<Particle>& getParticles();
     double getRadius() const;
     Vec3 getBounding() const;
+
+    void setMinSpeed(const double &speed);
+    void setTimeBetweenParticles(const int &time);
+    void setGravityType(const GravityType &type);
+    void setGravityStrength(const double &strenght);
+    void setFriction(const double &friction);
 
 private:
     int _antall;
