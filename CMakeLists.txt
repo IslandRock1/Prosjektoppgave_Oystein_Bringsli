@@ -11,6 +11,7 @@ set(
         include/Particle.hpp
         include/ThreeppHandler.hpp
         include/ParticleHandler.hpp
+        include/GravityControl.hpp
 )
 
 set(
@@ -20,6 +21,7 @@ set(
         src/Particle.cpp
         src/ThreeppHandler.cpp
         src/ParticleHandler.cpp
+        src/GravityControl.cpp
 )
 
 add_executable(main ${sources} ${headers})

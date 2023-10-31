@@ -10,11 +10,12 @@
 
 class Particle {
 public:
-    Vec3 pos;
+    Vec3 pos = {0, 0, 0};
 
     Particle(Vec3 pos, Vec3 vel, double dt, int index);
     Particle(Vec3 pos, Vec3 prev_pos, int index);
     Particle(Vec3 pos, int index);
+    Particle();
 
     void Move(double dt);
     int getIndex() const;
@@ -28,7 +29,7 @@ public:
     void add_Gravity_Between(const Particle &p, double gravity_strength);
 
 private:
-    Vec3 _pos_prev;
+    Vec3 _pos_prev = {0, 0, 0};
     Vec3 _gravity = {0, 0, 0};
 
     int _index;
