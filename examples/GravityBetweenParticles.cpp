@@ -1,10 +1,11 @@
+//
+// Created by Øystein Bringsli on 1/11/2023.
+//
 
 #include "ThreeppHandler.hpp"
 #include "ParticleHandler.hpp"
 #include "GravityControl.hpp"
 #include "Vec3.hpp"
-
-using namespace threepp;
 
 int main() {
 

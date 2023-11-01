@@ -20,7 +20,7 @@ void GravityControl::addGravity(const double& GravityStrength, const GravityType
             Vec3 direction = pos;
             double length = direction.length();
 
-            _gravity += direction.norm() * (GravityStrength / (length * length));
+            _gravity -= direction.norm() * (GravityStrength / (length * length));
         } break;
 
         case GravityType::BetweenObjects: {
