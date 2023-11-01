@@ -8,14 +8,14 @@ As of 10.10.23 the project is still in the start phase, and not ready to be used
 Update. As of 30.10.23 the project is runnable. The configuration of particle spawn is very poorly designed currently, but will be better shortly.
 
 ### Todo:
-    FPS and dt is currently only time for particle calculation, and not rendering
+    General cleanup and user excperience/configuring (Priority 1)  
+    Add KeyListener to be able to get user input while running (Priority 2)
+    FPS and dt text is currently only time for particle calculation, and not rendering (Quick fix)
     Better README
-    Fix border / Outline
-    Implement better searching algorithm for particle collisions
+    Fix border / Outline. Going to look at boid example from threepp
+    Implement better searching algorithm for particle collisions (Most fun)
     Make a better readme
-    General cleanup and user excperience/configuring
     Implement a way to save picture/video that scales when simuation can not run at 60 FPS
-    Implement own dt function, for accurate assesment of how many particles are possible
 
 ### How to build?
 This simulation uses threepp to render.
