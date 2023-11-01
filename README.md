@@ -5,7 +5,8 @@ The project is largely based on a previous project of mine for a similar simulat
 
 ### Current state
 As of 10.10.23 the project is still in the start phase, and not ready to be used.
-Update. As of 30.10.23 the project is runnable. The configuration of particle spawn is very poorly designed currently, but will be better shortly.
+
+Update: As of 01.11.23 the project is runnable with three different example configurations. The configuration of particle spawn is very poorly designed currently, but will be better shortly.
 
 ### Todo:
     FPS and dt is currently only time for particle calculation, and not rendering
