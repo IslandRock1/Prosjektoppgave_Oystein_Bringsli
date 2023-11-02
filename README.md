@@ -16,7 +16,6 @@ Update: As of 01.11.23 the project is runnable with three different example conf
     Better README
     Fix border / Outline. Going to look at boid example from threepp
     Implement better searching algorithm for particle collisions (Most fun)
-    Make a better readme
     Implement a way to save picture/video that scales when simuation can not run at 60 FPS
 
 ### How to build?
