@@ -29,6 +29,10 @@ public:
 
     int frameCount = 0;
 
+    void setRandomColor(bool input);
+    void setColor(const Color &color);
+    void setColor(float r, float g, float b);
+
 private:
     Canvas _canvas;
     GLRenderer _renderer;
@@ -44,6 +48,8 @@ private:
 
     //Should be called something along the lines of "particleMeshes" or whatever
     std::vector<std::shared_ptr<Mesh>> _particleMeshes;
+    bool _randomColor = false;
+    Color _color = {1, 1, 1};
 
     ParticleHandler &_particleHandler;
     bool _maxCapasity = false;

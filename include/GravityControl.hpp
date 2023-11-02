@@ -13,7 +13,8 @@
 enum GravityType {
     Ground = 0,
     Center = 1,
-    BetweenObjects = 2
+    BetweenObjects = 2,
+    NoGravity = 3
 };
 
 class GravityControl {

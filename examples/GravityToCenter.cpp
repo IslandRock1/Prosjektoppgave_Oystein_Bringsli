@@ -16,6 +16,7 @@ int main() {
     particleHandler.setFriction(0.99);
 
     ThreeppHandler handler{"Particle Simulator", particleHandler};
+    handler.setColor(1, 0, 1);
 
     handler.addText("Frame 0", 0, 0, 1.5);
     handler.addText("Particles: 0", 0, 20, 1.5);
