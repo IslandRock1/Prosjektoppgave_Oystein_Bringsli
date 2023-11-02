@@ -130,7 +130,7 @@ void ThreeppHandler::CanvasAnimate() {
 
         frameCount++;
         auto fps = static_cast<int>(1000000.0 / dt);
-        //Allocates 50% of time to particle collisions, and rest to rendering
+        //Allocates 50% of time to particle collisions, and rest to rendering. Not happy with this, should also be able to turn it off.
         if (fps < 120.0) {_maxCapasity = true;}
 
         //Mostly for debugging
