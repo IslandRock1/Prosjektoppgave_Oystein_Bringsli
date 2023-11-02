@@ -147,7 +147,7 @@ void ParticleHandler::makeParticle() {
 
     //Creates a random speed, with random direction.
     Vec3 prev = {_startPos.x + x_speed, _startPos.y + y_speed, _startPos.z + z_speed};
-    _particles.emplace_back(_startPos, prev, _currentAntall, _gravityType);
+    _particles.emplace_back(_startPos, prev, _currentAntall);
     _currentAntall++;
 }
 

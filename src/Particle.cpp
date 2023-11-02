@@ -5,7 +5,7 @@
 #include "Vec3.hpp"
 #include "Particle.hpp"
 
-Particle::Particle(Vec3 pos, Vec3 prev_pos, int index, GravityType gravityType)
+Particle::Particle(Vec3 pos, Vec3 prev_pos, int index)
     : GravityControl(pos), _pos_prev(prev_pos), _index(index) {}
 
 void Particle::Move(double dt) {

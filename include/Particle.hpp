@@ -11,7 +11,7 @@
 
 class Particle: public GravityControl {
 public:
-    Particle(Vec3 pos, Vec3 prev_pos, int index, GravityType gravityType);
+    Particle(Vec3 pos, Vec3 prev_pos, int index);
 
     void Move(double dt);
     int getIndex() const;
