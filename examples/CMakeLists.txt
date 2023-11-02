@@ -1,6 +1,5 @@
 
-add_executable(GravityBetweenParticles GravityBetweenParticles.cpp
-        SimpleExample.cpp)
+add_executable(GravityBetweenParticles GravityBetweenParticles.cpp)
 target_link_libraries(GravityBetweenParticles PRIVATE ParticleSim)
 
 add_executable(GravityToGround GravityToGround.cpp)

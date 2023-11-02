@@ -1,2 +1,2 @@
 
-#Wont compile CMake without a file here.. no idea why. Does not need to have any contents.
+#Wont compile CMake without a file here.. (because then its treated as a library)
