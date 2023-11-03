@@ -1,5 +1,5 @@
 //
-// Created by Øystein Bringsli on 2/11/2023.
+// Created by Øystein Bringsli on 3/11/2023.
 //
 
 #include "ThreeppHandler.hpp"
@@ -11,11 +11,12 @@ int main() {
 
     Vec3 boundingBoxSize = {100, 100, 100};
     ParticleHandler particleHandler = ParticleHandler(boundingBoxSize, 500, 3);
-    particleHandler.setGravityType(GravityType::NoGravity);
+    particleHandler.setGravityType(GravityType::BetweenObjects);
+    particleHandler.setGravityStrength(500);
     particleHandler.setTimeBetweenParticles(3);
     particleHandler.setMinSpeed(0.1);
     particleHandler.setFriction(0.99);
-    particleHandler.setSubSteps(2);
+    particleHandler.setSubSteps(8);
 
     ThreeppHandler handler{"Particle Simulator", particleHandler};
     handler.setRandomColor(true);

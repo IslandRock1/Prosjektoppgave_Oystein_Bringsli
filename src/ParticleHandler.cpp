@@ -151,18 +151,9 @@ void ParticleHandler::makeParticle() {
     _currentAntall++;
 }
 
-std::vector<Particle>& ParticleHandler::getParticles() {
-    return _particles;
-}
-
-double ParticleHandler::getRadius() const {
-    return _radius;
-}
-
-Vec3 ParticleHandler::getBounding() const {
-    return _bounding_box;
-}
-
+std::vector<Particle>& ParticleHandler::getParticles() {return _particles;}
+double ParticleHandler::getRadius() const {return _radius;}
+Vec3 ParticleHandler::getBounding() const {return _bounding_box;}
 void ParticleHandler::setMinSpeed(const double& speed) {_minSpeed = speed;}
 void ParticleHandler::setTimeBetweenParticles(const int& time) {_time_between_particles = time;}
 void ParticleHandler::setGravityType(const GravityType& type) {_gravityType = type;}
