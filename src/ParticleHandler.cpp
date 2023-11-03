@@ -168,3 +168,4 @@ void ParticleHandler::setTimeBetweenParticles(const int& time) {_time_between_pa
 void ParticleHandler::setGravityType(const GravityType& type) {_gravityType = type;}
 void ParticleHandler::setGravityStrength(const double& strenght) {_gravityStrength = strenght;}
 void ParticleHandler::setFriction(const double& friction) {_friction = friction;}
+void ParticleHandler::setSubSteps(const int& SubSteps) {_substeps = SubSteps;}
