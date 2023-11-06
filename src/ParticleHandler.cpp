@@ -131,22 +131,25 @@ void ParticleHandler::makeParticle() {
 
     std::random_device dev;
     std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> random(0,1000);
+    std::mt19937 rng2(dev());
+    int rand_size = 1000;
+    std::uniform_int_distribution<std::mt19937::result_type> random(0,rand_size);
     std::uniform_int_distribution<std::mt19937::result_type> random_bool(0, 1);
 
+    float divisor = static_cast<float>(rand_size) / _minSpeed;
+
     //rand => [0, 1000] | / 10000.0 => [0, 0.1]
-    double x_speed = std::max(static_cast<double>(random(rng)) / 10000.0, _minSpeed);
-    double y_speed = std::max(static_cast<double>(random(rng)) / 10000.0, _minSpeed);
-    double z_speed = std::max(static_cast<double>(random(rng)) / 10000.0, _minSpeed);
+    double x_speed = static_cast<double>(random(rng)) / divisor;
+    //double y_speed = std::max(static_cast<double>(random(rng)) / 10000.0, _minSpeed);
+    double z_speed = static_cast<double>(random(rng2)) / divisor;
 
     //[0, 1] * 2 => [0, 2] | -1 => [-1, 1]
     x_speed *= static_cast<double>(random_bool(rng)) * 2.0 - 1.0;
-    y_speed *= static_cast<double>(random_bool(rng)) * 2.0 - 1.0;
+    //y_speed *= static_cast<double>(random_bool(rng)) * 2.0 - 1.0;
     z_speed *= static_cast<double>(random_bool(rng)) * 2.0 - 1.0;
 
-
     //Creates a random speed, with random direction.
-    Vec3 prev = {_startPos.x + x_speed, _startPos.y + y_speed, _startPos.z + z_speed};
+    Vec3 prev = {_startPos.x + x_speed, _startPos.y, _startPos.z + z_speed};
     _particles.emplace_back(_startPos, prev, _currentAntall);
     _currentAntall++;
 }
