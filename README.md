@@ -17,7 +17,6 @@ Update: As of 01.11.23 the project is runnable with three different example conf
     Fix border / Outline. Going to look at boid example from threepp
     Implement better searching algorithm for particle collisions (Most fun)
     Implement a way to save picture/video that scales when simuation can not run at 60 FPS
-    Potentially remove main from src to build as library.
 
 ### How to build?
 This simulation uses threepp to render.
