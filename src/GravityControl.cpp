@@ -30,5 +30,6 @@ void GravityControl::addGravity(const double& GravityStrength, const GravityType
             _gravity += direction.norm() * (GravityStrength / (length * length));
         } break;
 
+            //Not needed to handle "NoGravity"
     }
 }

@@ -38,6 +38,12 @@ ThreeppHandler::ThreeppHandler(const std::string& title, ParticleHandler &partic
     _drawBorder();
 }
 
+void ThreeppHandler::setRandomColor(bool input) {_randomColor = input;}
+
+void ThreeppHandler::setColor(const Color &color) {_color = color;}
+
+void ThreeppHandler::setColor(float r, float g, float b) {_color = {r, g, b};}
+
 void ThreeppHandler::_drawBorder() {
     //Not happy with this. Going to look over the boid example to see how Lars did it later.
     auto boxGeo = BoxGeometry::create(100, 100, 100);
@@ -76,11 +82,15 @@ int ThreeppHandler::addSphere(Vec3 pos, float radius) {
     std::mt19937 rng(dev());
     std::uniform_int_distribution<std::mt19937::result_type> random(0,255);
 
-    auto r = static_cast<float>(random(rng)) / 255.0f;
-    auto g = static_cast<float>(random(rng)) / 255.0f;
-    auto b = static_cast<float>(random(rng)) / 255.0f;
+    if (_randomColor) {
+        auto r = static_cast<float>(random(rng)) / 255.0f;
+        auto g = static_cast<float>(random(rng)) / 255.0f;
+        auto b = static_cast<float>(random(rng)) / 255.0f;
 
-    material->color.setRGB(r, g, b);
+        material->color.setRGB(r, g, b);
+    } else {
+        material->color.copy(_color);
+    }
 
     auto mesh = Mesh::create(geometry, material);
     mesh->position = Vector3(pos.x, pos.y, pos.z);
@@ -120,7 +130,7 @@ void ThreeppHandler::CanvasAnimate() {
 
         frameCount++;
         auto fps = static_cast<int>(1000000.0 / dt);
-        //Allocates 50% of time to particle collisions, and rest to rendering
+        //Allocates 50% of time to particle collisions, and rest to rendering. Not happy with this, should also be able to turn it off.
         if (fps < 120.0) {_maxCapasity = true;}
 
         //Mostly for debugging

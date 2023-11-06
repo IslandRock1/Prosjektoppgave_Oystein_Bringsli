@@ -147,24 +147,16 @@ void ParticleHandler::makeParticle() {
 
     //Creates a random speed, with random direction.
     Vec3 prev = {_startPos.x + x_speed, _startPos.y + y_speed, _startPos.z + z_speed};
-    _particles.emplace_back(_startPos, prev, _currentAntall, _gravityType);
+    _particles.emplace_back(_startPos, prev, _currentAntall);
     _currentAntall++;
 }
 
-std::vector<Particle>& ParticleHandler::getParticles() {
-    return _particles;
-}
-
-double ParticleHandler::getRadius() const {
-    return _radius;
-}
-
-Vec3 ParticleHandler::getBounding() const {
-    return _bounding_box;
-}
-
+std::vector<Particle>& ParticleHandler::getParticles() {return _particles;}
+double ParticleHandler::getRadius() const {return _radius;}
+Vec3 ParticleHandler::getBounding() const {return _bounding_box;}
 void ParticleHandler::setMinSpeed(const double& speed) {_minSpeed = speed;}
 void ParticleHandler::setTimeBetweenParticles(const int& time) {_time_between_particles = time;}
 void ParticleHandler::setGravityType(const GravityType& type) {_gravityType = type;}
 void ParticleHandler::setGravityStrength(const double& strenght) {_gravityStrength = strenght;}
 void ParticleHandler::setFriction(const double& friction) {_friction = friction;}
+void ParticleHandler::setSubSteps(const int& SubSteps) {_substeps = SubSteps;}

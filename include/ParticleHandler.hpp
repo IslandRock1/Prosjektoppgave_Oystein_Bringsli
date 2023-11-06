@@ -25,6 +25,7 @@ public:
     void setGravityType(const GravityType &type);
     void setGravityStrength(const double &strenght);
     void setFriction(const double &friction);
+    void setSubSteps(const int &SubSteps);
 
 private:
     int _antall;

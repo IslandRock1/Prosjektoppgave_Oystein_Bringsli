@@ -10,12 +10,14 @@
 int main() {
 
     Vec3 boundingBoxSize = {100, 100, 100};
-    ParticleHandler particleHandler = ParticleHandler(boundingBoxSize, 150, 8);
+    ParticleHandler particleHandler = ParticleHandler(boundingBoxSize, 150, 6);
     particleHandler.setGravityType(GravityType::Ground);
+    particleHandler.setTimeBetweenParticles(5);
     particleHandler.setMinSpeed(0.1);
     particleHandler.setFriction(0.99);
 
     ThreeppHandler handler{"Particle Simulator", particleHandler};
+    handler.setColor(1, 1, 1);
 
     handler.addText("Frame 0", 0, 0, 1.5);
     handler.addText("Particles: 0", 0, 20, 1.5);
