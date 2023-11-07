@@ -14,7 +14,7 @@ class ParticleHandler {
 public:
     ParticleHandler(Vec3 bounding_box_size, int max_antall, double radius);
 
-    void step(double dt, bool max_capacity = false);
+    void step(double dt, bool maxCapacity = false);
     void makeParticle();
     std::vector<Particle>& getParticles();
     double getRadius() const;
@@ -35,8 +35,8 @@ private:
 
     Vec3 _startPos = {0, 0, 0};
     double _minSpeed = 0.01;
-    int _time_since_last_particle = 0;
-    int _time_between_particles = 10;
+    int _timeSinceLastParticle = 0;
+    int _timeBetweenParticles = 10;
 
     GravityType _gravityType = GravityType::Ground;
 
@@ -44,7 +44,7 @@ private:
     double _gravityStrength = 1000;
     double _friction = 0.95; //speed *= _friction
 
-    Vec3 _bounding_box;
+    Vec3 _boundingBox;
     int _substeps = 8;
 
     void addGravity();

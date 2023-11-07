@@ -20,7 +20,7 @@ public:
     void setPrevPos(Vec3 newPos);
 
 private:
-    Vec3 _pos_prev = {0, 0, 0};
+    Vec3 _posPrev = {0, 0, 0};
     int _index;
 };
 

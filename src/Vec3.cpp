@@ -36,7 +36,7 @@ Vec3& Vec3::operator-=(const Vec3 &other) {
     return *this;
 }
 
-double Vec3::length_cube() const {
+double Vec3::lengthCube() const {
     return x * x + y * y + z * z;
 }
 
@@ -49,7 +49,7 @@ Vec3 Vec3::norm() const {
     return Vec3(x, y, z) / length();
 }
 
-Vec3& Vec3::norm_inline() {
+Vec3& Vec3::normInline() {
     *this /= length();
     return *this;
 }

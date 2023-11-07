@@ -10,7 +10,7 @@
 int main() {
 
     Vec3 boundingBoxSize = {100, 100, 100};
-    ParticleHandler particleHandler = ParticleHandler(boundingBoxSize, 150, 6);
+    ParticleHandler particleHandler = ParticleHandler(boundingBoxSize, 1000, 2);
     particleHandler.setGravityType(GravityType::Ground);
     particleHandler.setTimeBetweenParticles(5);
     particleHandler.setMinSpeed(0.1);

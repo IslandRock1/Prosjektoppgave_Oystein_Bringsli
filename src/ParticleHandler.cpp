@@ -8,8 +8,8 @@
 #include "ParticleHandler.hpp"
 
 ParticleHandler::ParticleHandler(Vec3 bounding_box_size, int max_antall, double radius)
-    : _bounding_box(bounding_box_size / 2), _antall(max_antall), _radius(radius) {
-    _startPos.y = _bounding_box.y * 0.8;
+    : _boundingBox(bounding_box_size / 2), _antall(max_antall), _radius(radius) {
+    _startPos.y = _boundingBox.y * 0.8;
 }
 
 void ParticleHandler::addGravity() {
@@ -42,30 +42,30 @@ void ParticleHandler::handleWallColl() {
     {
         //Could be separate functions, maybe a single function too
         //But would need to know witch axis hits the wall
-        if (((p.pos.x - _radius) < (-_bounding_box.x)) or ((p.pos.x + _radius) > _bounding_box.x))
+        if (((p.pos.x - _radius) < (-_boundingBox.x)) or ((p.pos.x + _radius) > _boundingBox.x))
         {
             Vec3 prevPos = p.getPrevPos();
             double distToPrevPos = p.pos.x - prevPos.x;
-            p.pos.x = (_bounding_box.x - _radius) * ((p.pos.x > 0) - (p.pos.x < 0));
+            p.pos.x = (_boundingBox.x - _radius) * ((p.pos.x > 0) - (p.pos.x < 0));
             prevPos.x = p.pos.x  + distToPrevPos * _friction;
 
             p.setPrevPos(prevPos);
         }
 
-        if (((p.pos.y - _radius) < (-_bounding_box.y)) or ((p.pos.y + _radius) > _bounding_box.y))
+        if (((p.pos.y - _radius) < (-_boundingBox.y)) or ((p.pos.y + _radius) > _boundingBox.y))
         {
             Vec3 prevPos = p.getPrevPos();
             double distToPrevPos = p.pos.y - prevPos.y;
-            p.pos.y = (_bounding_box.y - _radius) * ((p.pos.y > 0) - (p.pos.y < 0));
+            p.pos.y = (_boundingBox.y - _radius) * ((p.pos.y > 0) - (p.pos.y < 0));
             prevPos.y = p.pos.y  + distToPrevPos * _friction;
             p.setPrevPos(prevPos);
         }
 
-        if (((p.pos.z - _radius) < (-_bounding_box.z)) or ((p.pos.z + _radius) > _bounding_box.z))
+        if (((p.pos.z - _radius) < (-_boundingBox.z)) or ((p.pos.z + _radius) > _boundingBox.z))
         {
             Vec3 prevPos = p.getPrevPos();
             double distToPrevPos = p.pos.z - prevPos.z;
-            p.pos.z = (_bounding_box.z - _radius) * ((p.pos.z > 0) - (p.pos.z < 0));
+            p.pos.z = (_boundingBox.z - _radius) * ((p.pos.z > 0) - (p.pos.z < 0));
             prevPos.z = p.pos.z  + distToPrevPos * _friction;
             p.setPrevPos(prevPos);
         }
@@ -81,10 +81,10 @@ void ParticleHandler::handleCollision() {
             if (p1.getIndex() <= p0.getIndex()) { continue;}
 
             Vec3 axis = p0.pos - p1.pos;
-            double qdist = axis.length_cube();
+            double qdist = axis.lengthCube();
 
             if (qdist < (_radius * _radius * 4)) { //qdist => (2r)^2, = 4r^2
-                axis.norm_inline();
+                axis.normInline();
                 double delta = (_radius * 2) - std::sqrt(qdist);
 
                 Vec3 dist_to_prev_p0 = p0.pos - p0.getPrevPos();
@@ -102,7 +102,7 @@ void ParticleHandler::handleCollision() {
     }
 }
 
-void ParticleHandler::step(double dt, bool max_capasity) {
+void ParticleHandler::step(double dt, bool maxCapacity) {
 
     for (int current_substep = 0; current_substep < _substeps; current_substep++) {
         addGravity();
@@ -116,7 +116,7 @@ void ParticleHandler::step(double dt, bool max_capasity) {
         }
     }
 
-    if (! max_capasity) {
+    if (!maxCapacity) {
         if (_currentAntall < _antall) {
             makeParticle();
         }
@@ -125,9 +125,9 @@ void ParticleHandler::step(double dt, bool max_capasity) {
 
 void ParticleHandler::makeParticle() {
     //Makes sure the particles does not spawn in on top of each-other
-    _time_since_last_particle++;
-    if (_time_since_last_particle < _time_between_particles) {return;}
-    _time_since_last_particle = 0;
+    _timeSinceLastParticle++;
+    if (_timeSinceLastParticle < _timeBetweenParticles) {return;}
+    _timeSinceLastParticle = 0;
 
     std::random_device dev;
     std::mt19937 rng(dev());
@@ -156,9 +156,9 @@ void ParticleHandler::makeParticle() {
 
 std::vector<Particle>& ParticleHandler::getParticles() {return _particles;}
 double ParticleHandler::getRadius() const {return _radius;}
-Vec3 ParticleHandler::getBounding() const {return _bounding_box;}
+Vec3 ParticleHandler::getBounding() const {return _boundingBox;}
 void ParticleHandler::setMinSpeed(const double& speed) {_minSpeed = speed;}
-void ParticleHandler::setTimeBetweenParticles(const int& time) {_time_between_particles = time;}
+void ParticleHandler::setTimeBetweenParticles(const int& time) { _timeBetweenParticles = time;}
 void ParticleHandler::setGravityType(const GravityType& type) {_gravityType = type;}
 void ParticleHandler::setGravityStrength(const double& strenght) {_gravityStrength = strenght;}
 void ParticleHandler::setFriction(const double& friction) {_friction = friction;}

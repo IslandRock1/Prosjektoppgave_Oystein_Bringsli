@@ -36,10 +36,10 @@ public:
     Vec3& operator/=(T other);
 
     double length() const;
-    double length_cube() const;
+    double lengthCube() const;
 
     Vec3 norm() const;
-    Vec3& norm_inline();
+    Vec3& normInline();
 
     double x;
     double y;
