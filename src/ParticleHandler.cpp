@@ -42,7 +42,7 @@ void ParticleHandler::handleWallColl() {
     {
         //Could be separate functions, maybe a single function too
         //But would need to know witch axis hits the wall
-        if (((p.pos.x - _radius) < (-_boundingBox.x)) or ((p.pos.x + _radius) > _boundingBox.x))
+        if (((p.pos.x - _radius) < (-_boundingBox.x)) || ((p.pos.x + _radius) > _boundingBox.x))
         {
             Vec3 prevPos = p.getPrevPos();
             double distToPrevPos = p.pos.x - prevPos.x;
@@ -52,7 +52,7 @@ void ParticleHandler::handleWallColl() {
             p.setPrevPos(prevPos);
         }
 
-        if (((p.pos.y - _radius) < (-_boundingBox.y)) or ((p.pos.y + _radius) > _boundingBox.y))
+        if (((p.pos.y - _radius) < (-_boundingBox.y)) || ((p.pos.y + _radius) > _boundingBox.y))
         {
             Vec3 prevPos = p.getPrevPos();
             double distToPrevPos = p.pos.y - prevPos.y;
@@ -61,7 +61,7 @@ void ParticleHandler::handleWallColl() {
             p.setPrevPos(prevPos);
         }
 
-        if (((p.pos.z - _radius) < (-_boundingBox.z)) or ((p.pos.z + _radius) > _boundingBox.z))
+        if (((p.pos.z - _radius) < (-_boundingBox.z)) || ((p.pos.z + _radius) > _boundingBox.z))
         {
             Vec3 prevPos = p.getPrevPos();
             double distToPrevPos = p.pos.z - prevPos.z;
