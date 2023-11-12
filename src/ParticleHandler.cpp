@@ -6,6 +6,7 @@
 #include <cmath>
 #include <random>
 #include "ParticleHandler.hpp"
+#include "MyKeyListener.hpp"
 
 ParticleHandler::ParticleHandler(Vec3 bounding_box_size, int max_antall, double radius)
     : _boundingBox(bounding_box_size / 2), _antall(max_antall), _radius(radius) {

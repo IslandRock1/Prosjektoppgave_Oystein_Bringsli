@@ -5,6 +5,7 @@ add_library(ParticleSim
         ThreeppHandler.cpp
         ParticleHandler.cpp
         GravityControl.cpp
+        MyKeyListener.cpp
 )
 
 target_include_directories(ParticleSim PUBLIC ${CMAKE_SOURCE_DIR}/include)
