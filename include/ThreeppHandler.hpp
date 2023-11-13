@@ -42,6 +42,7 @@ private:
     Clock _clock;
 
     void _drawBorder();
+    void saveImage();
 
     TextRenderer _textRenderer;
     std::vector<TextHandle*> _textHandles;
