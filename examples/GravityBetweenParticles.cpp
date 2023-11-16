@@ -5,6 +5,7 @@
 #include "ThreeppHandler.hpp"
 #include "ParticleHandler.hpp"
 #include "GravityControl.hpp"
+#include "MyKeyListener.hpp"
 #include "Vec3.hpp"
 
 int main() {
@@ -19,6 +20,9 @@ int main() {
 
     handler.addText("Frame 0", 0, 0, 1.5);
     handler.addText("Particles: 0", 0, 20, 1.5);
+
+    MyKeyListener myKeyListener(particleHandler);
+    handler.addKeyListener(myKeyListener);
 
     handler.setWindowResizeListener();
     handler.CanvasAnimate();

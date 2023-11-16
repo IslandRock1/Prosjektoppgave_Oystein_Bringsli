@@ -12,11 +12,11 @@ using namespace threepp;
 
 class MyKeyListener: public KeyListener {
 public:
-    MyKeyListener(ParticleHandler handler);
+    explicit MyKeyListener(ParticleHandler &handler);
     void onKeyPressed(KeyEvent evt) override;
     void onKeyRepeat(KeyEvent evt) override;
 private:
-    ParticleHandler _particleHandler;
+    ParticleHandler &_particleHandler;
 };
 
 

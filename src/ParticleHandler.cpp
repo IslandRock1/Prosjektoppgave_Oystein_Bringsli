@@ -155,6 +155,31 @@ void ParticleHandler::makeParticle() {
     _currentAntall++;
 }
 
+void ParticleHandler::addToStartPos(const Vec3& deltaPosition) {
+    if (deltaPosition.x != 0) {
+        double newPos = _startPos.x + deltaPosition.x + _radius * (deltaPosition.x / std::abs(deltaPosition.x));
+        if ((-1 * _boundingBox.x < newPos) and (newPos < _boundingBox.x)) {
+            _startPos.x = newPos;
+        }
+    }
+
+    if (deltaPosition.y != 0) {
+        double newPos = _startPos.y + deltaPosition.y + _radius * (deltaPosition.y / std::abs(deltaPosition.y));
+        if ((-1 * _boundingBox.y < newPos) and (newPos < _boundingBox.y)) {
+            _startPos.y = newPos;
+        }
+    }
+
+    if (deltaPosition.z != 0) {
+        double newPos = _startPos.z + deltaPosition.z + _radius * (deltaPosition.z / std::abs(deltaPosition.z));
+        if ((-1 * _boundingBox.z < newPos) and (newPos < _boundingBox.z)) {
+            _startPos.z = newPos;
+        }
+    }
+}
+
+
+Vec3 ParticleHandler::getStartPos() {return _startPos;}
 std::vector<Particle>& ParticleHandler::getParticles() {return _particles;}
 double ParticleHandler::getRadius() const {return _radius;}
 Vec3 ParticleHandler::getBounding() const {return _boundingBox;}

@@ -36,6 +36,16 @@ ThreeppHandler::ThreeppHandler(const std::string& title, ParticleHandler &partic
     });
 
     _drawBorder();
+
+    auto startPos = _particleHandler.getStartPos();
+    auto geo = SphereGeometry::create(_particleHandler.getRadius());
+    auto material = MeshBasicMaterial::create();
+    material->color.setRGB(0.4, 0.1, 0.1);
+    auto mesh = Mesh::create(geo, material);
+    mesh->position.set(startPos.x, startPos.y, startPos.y);
+
+    _spawnPointPreview = mesh;
+    _scene->add(_spawnPointPreview);
 }
 
 void ThreeppHandler::setRandomColor(bool input) {_randomColor = input;}
@@ -101,6 +111,8 @@ int ThreeppHandler::addSphere(Vec3 pos, float radius) {
     return _particleMeshes.size() - 1;
 }
 
+void ThreeppHandler::addKeyListener(MyKeyListener& keyListener) {_canvas.addKeyListener(&keyListener);}
+
 void ThreeppHandler::setWindowResizeListener() {
     _canvas.onWindowResize([&](WindowSize size) {
         _camera->aspect = size.aspect();
@@ -135,7 +147,10 @@ void ThreeppHandler::CanvasAnimate() {
 
         //Mostly for debugging
         _textHandles.at(0)->setText("Frame " + std::to_string(frameCount) + " | FPS: " + std::to_string((fps)) + " | dt: " + std::to_string(static_cast<int>(dt / 1000.0)) + "ms");
-        _textHandles.at(1)->setText("Particles: " + std::to_string(particles.size()));
+
+        auto startPos = _particleHandler.getStartPos();
+        _spawnPointPreview->position.set(startPos.x, startPos.y, startPos.z);
+        _textHandles.at(1)->setText("Particles: " + std::to_string(particles.size()) + " | Start pos: {" + std::to_string(startPos.x) + ", " + std::to_string(startPos.y) + ", " + std::to_string(startPos.z) + "}");
 
         _renderer.render(*_scene, *_camera);
         _renderer.resetState();

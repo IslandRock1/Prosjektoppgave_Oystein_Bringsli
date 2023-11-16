@@ -10,6 +10,7 @@
 #include <string>
 
 #include "ParticleHandler.hpp"
+#include "MyKeyListener.hpp"
 #include "Vec3.hpp"
 #include "Particle.hpp"
 
@@ -24,6 +25,7 @@ public:
     int addCircle(float radius, int segments = 32);
     int addSphere(Vec3 pos, float radius);
 
+    void addKeyListener(MyKeyListener &keyListener);
     void setWindowResizeListener();
     void CanvasAnimate();
 
@@ -47,8 +49,9 @@ private:
     TextRenderer _textRenderer;
     std::vector<TextHandle*> _textHandles;
 
-    //Should be called something along the lines of "particleMeshes" or whatever
     std::vector<std::shared_ptr<Mesh>> _particleMeshes;
+    std::shared_ptr<Mesh> _spawnPointPreview;
+
     bool _randomColor = false;
     Color _color = {1, 1, 1};
 
