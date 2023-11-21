@@ -20,7 +20,6 @@ ThreeppHandler::ThreeppHandler(const std::string& title, ParticleHandler &partic
       _scene(Scene::create()),
       _controls(*_camera, _canvas),
       _particleHandler(particleHandler)
-
 {
     _renderer.setClearColor(Color::black);
 
@@ -56,11 +55,13 @@ void ThreeppHandler::setColor(float r, float g, float b) {_color = {r, g, b};}
 
 void ThreeppHandler::_drawBorder() {
     //Not happy with this. Going to look over the boid example to see how Lars did it later.
-    auto boxGeo = BoxGeometry::create(100, 100, 100);
-    auto material = MeshBasicMaterial::create();
-    material->wireframe = true;
-    auto mesh = Mesh::create(boxGeo, material);
-    _scene->add(mesh);
+    float sizeX = _particleHandler.getBounding().x;
+    float sizeY = _particleHandler.getBounding().y;
+    float sizeZ = _particleHandler.getBounding().z;
+
+    static Box3 box{{-sizeX, -sizeY, -sizeZ},{sizeX, sizeY, sizeZ}};
+    auto boxHelper = Box3Helper::create(box);
+    _scene->add(boxHelper);
 }
 
 int ThreeppHandler::addText(const std::string& label, int x, int y, float scale) {
