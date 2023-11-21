@@ -40,6 +40,16 @@ void MyKeyListener::onKeyPressed(threepp::KeyEvent evt) {
         {
             _particleHandler.addToStartPos({0, 1, 0});
         } break;
+
+        case Key::U:
+        {
+            _particleHandler.addToMaxAntall(1);
+        } break;
+
+        case Key::J:
+        {
+            _particleHandler.addToMaxAntall(-1);
+        } break;
     }
 }
 
@@ -73,6 +83,16 @@ void MyKeyListener::onKeyRepeat(threepp::KeyEvent evt) {
         case Key::S:
         {
             _particleHandler.addToStartPos({0, 1, 0});
+        } break;
+
+        case Key::U:
+        {
+            _particleHandler.addToMaxAntall(5);
+        } break;
+
+        case Key::J:
+        {
+            _particleHandler.addToMaxAntall(-5);
         } break;
     }
 }

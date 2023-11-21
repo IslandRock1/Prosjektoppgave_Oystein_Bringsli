@@ -14,13 +14,14 @@ int main() {
     particleHandler.setGravityType(GravityType::Ground);
     particleHandler.setTimeBetweenParticles(20);
     particleHandler.setMinSpeed(0.1);
-    particleHandler.setFriction(0.9);
+    particleHandler.setFriction(0.999);
 
     ThreeppHandler handler{"Particle Simulator", particleHandler};
     handler.setColor(1, 1, 1);
 
     handler.addText("Frame 0", 0, 0, 1.5);
     handler.addText("Particles: 0", 0, 20, 1.5);
+    handler.addText("Max antall: ", 0, 40, 1.5);
 
     MyKeyListener myKeyListener(particleHandler);
     handler.addKeyListener(myKeyListener);

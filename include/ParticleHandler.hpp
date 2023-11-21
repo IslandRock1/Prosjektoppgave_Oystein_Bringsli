@@ -27,6 +27,8 @@ public:
     void setFriction(const double &friction);
     void setSubSteps(const int &SubSteps);
 
+    void addToMaxAntall(signed int deltaAntall);
+    int getAntall() const;
     void addToStartPos(const Vec3& deltaPosition);
     Vec3 getStartPos();
 

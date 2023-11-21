@@ -117,11 +117,11 @@ void ParticleHandler::step(double dt, bool maxCapacity) {
         }
     }
 
-    if (!maxCapacity) {
-        if (_currentAntall < _antall) {
-            makeParticle();
-        }
+    //if (!maxCapacity) {
+    if (_currentAntall < _antall) {
+        makeParticle();
     }
+    //}
 }
 
 void ParticleHandler::makeParticle() {
@@ -155,6 +155,8 @@ void ParticleHandler::makeParticle() {
     _currentAntall++;
 }
 
+void ParticleHandler::addToMaxAntall(signed int deltaAntall) {_antall += deltaAntall;}
+
 void ParticleHandler::addToStartPos(const Vec3& deltaPosition) {
     if (deltaPosition.x != 0) {
         double newPos = _startPos.x + deltaPosition.x + _radius * (deltaPosition.x / std::abs(deltaPosition.x));
@@ -178,7 +180,7 @@ void ParticleHandler::addToStartPos(const Vec3& deltaPosition) {
     }
 }
 
-
+int ParticleHandler::getAntall() const {return _antall;}
 Vec3 ParticleHandler::getStartPos() {return _startPos;}
 std::vector<Particle>& ParticleHandler::getParticles() {return _particles;}
 double ParticleHandler::getRadius() const {return _radius;}

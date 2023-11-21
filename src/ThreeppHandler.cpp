@@ -152,6 +152,7 @@ void ThreeppHandler::CanvasAnimate() {
         auto startPos = _particleHandler.getStartPos();
         _spawnPointPreview->position.set(startPos.x, startPos.y, startPos.z);
         _textHandles.at(1)->setText("Particles: " + std::to_string(particles.size()) + " | Start pos: {" + std::to_string(startPos.x) + ", " + std::to_string(startPos.y) + ", " + std::to_string(startPos.z) + "}");
+        _textHandles.at(2)->setText("Max antall: " + std::to_string(_particleHandler.getAntall()));
 
         _renderer.render(*_scene, *_camera);
         _renderer.resetState();
