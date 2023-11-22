@@ -1,0 +1,30 @@
+name: C++ Build and Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up C++ environment
+        uses: actions/setup-cpp@v2
+        with:
+          compiler: clang  # You can choose the compiler you prefer
+
+      - name: Build and Test
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          cmake --build .
+          ctest
