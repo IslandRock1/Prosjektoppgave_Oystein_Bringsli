@@ -2,9 +2,9 @@
 // Created by Øystein Bringsli on 1/11/2023.
 //
 
-#include "ThreeppHandler.hpp"
+#include "GravityObject.hpp"
 #include "ParticleHandler.hpp"
-#include "GravityControl.hpp"
+#include "ThreeppHandler.hpp"
 #include "Vec3.hpp"
 
 int main() {

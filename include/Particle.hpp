@@ -5,11 +5,11 @@
 #ifndef PROSJEKTOPPGAVE_OYSTEIN_BRINGSLI_PARTICLE_HPP
 #define PROSJEKTOPPGAVE_OYSTEIN_BRINGSLI_PARTICLE_HPP
 
-#include <array>
+#include "GravityObject.hpp"
 #include "Vec3.hpp"
-#include "GravityControl.hpp"
+#include <array>
 
-class Particle: public GravityControl {
+class Particle: public GravityObject {
 public:
     Particle(Vec3 pos, Vec3 prev_pos, int index);
 

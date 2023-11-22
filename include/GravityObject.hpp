@@ -17,15 +17,15 @@ enum GravityType {
     NoGravity = 3
 };
 
-class GravityControl {
+class GravityObject {
 public:
     Vec3 pos = {0, 0, 0};
 
-    GravityControl();
-    GravityControl(const Vec3 &pos);
+    GravityObject();
+    GravityObject(const Vec3 &pos);
 
     void resetGravity();
-    void addGravity(const double &GravityStrength, const GravityType &type, const GravityControl &other = GravityControl());
+    void addGravity(const double &GravityStrength, const GravityType &type, const GravityObject&other = GravityObject());
 
 protected:
     Vec3 _gravity = {0, 0, 0};

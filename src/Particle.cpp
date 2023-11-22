@@ -6,7 +6,7 @@
 #include "Particle.hpp"
 
 Particle::Particle(Vec3 pos, Vec3 prev_pos, int index)
-    : GravityControl(pos), _posPrev(prev_pos), _index(index) {}
+    : GravityObject(pos), _posPrev(prev_pos), _index(index) {}
 
 void Particle::Move(double dt) {
     Vec3 newPrevPos = pos;

@@ -4,7 +4,7 @@ add_library(ParticleSim
         Particle.cpp
         ThreeppHandler.cpp
         ParticleHandler.cpp
-        GravityControl.cpp
+        GravityObject.cpp
         MyKeyListener.cpp
 )
 

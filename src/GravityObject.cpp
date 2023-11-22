@@ -2,15 +2,15 @@
 // Created by Øystein Bringsli on 31/10/2023.
 //
 
-#include "GravityControl.hpp"
+#include "GravityObject.hpp"
 
-GravityControl::GravityControl() = default;
+GravityObject::GravityObject() = default;
 
-GravityControl::GravityControl(const Vec3& pos): pos(pos) {}
+GravityObject::GravityObject(const Vec3& pos): pos(pos) {}
 
-void GravityControl::resetGravity() {_gravity = {0, 0, 0};}
+void GravityObject::resetGravity() {_gravity = {0, 0, 0};}
 
-void GravityControl::addGravity(const double& GravityStrength, const GravityType& type, const GravityControl& other) {
+void GravityObject::addGravity(const double& GravityStrength, const GravityType& type, const GravityObject& other) {
     switch (type) {
         case GravityType::Ground: {
             _gravity += Vec3{0, -1, 0} * GravityStrength;

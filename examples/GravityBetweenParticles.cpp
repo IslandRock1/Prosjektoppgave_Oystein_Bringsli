@@ -2,10 +2,10 @@
 // Created by Øystein Bringsli on 1/11/2023.
 //
 
-#include "ThreeppHandler.hpp"
-#include "ParticleHandler.hpp"
-#include "GravityControl.hpp"
+#include "GravityObject.hpp"
 #include "MyKeyListener.hpp"
+#include "ParticleHandler.hpp"
+#include "ThreeppHandler.hpp"
 #include "Vec3.hpp"
 
 int main() {

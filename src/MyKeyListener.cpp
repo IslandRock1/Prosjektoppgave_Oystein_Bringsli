@@ -31,12 +31,12 @@ void MyKeyListener::onKeyPressed(threepp::KeyEvent evt) {
             _particleHandler.addToStartPos({0, 0, 1});
         } break;
 
-        case Key::W:
+        case Key::S:
         {
             _particleHandler.addToStartPos({0, -1, 0});
         } break;
 
-        case Key::S:
+        case Key::W:
         {
             _particleHandler.addToStartPos({0, 1, 0});
         } break;
@@ -75,12 +75,12 @@ void MyKeyListener::onKeyRepeat(threepp::KeyEvent evt) {
             _particleHandler.addToStartPos({0, 0, 1});
         } break;
 
-        case Key::W:
+        case Key::S:
         {
             _particleHandler.addToStartPos({0, -1, 0});
         } break;
 
-        case Key::S:
+        case Key::W:
         {
             _particleHandler.addToStartPos({0, 1, 0});
         } break;

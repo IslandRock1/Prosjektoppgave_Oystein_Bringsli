@@ -39,7 +39,7 @@ ThreeppHandler::ThreeppHandler(const std::string& title, ParticleHandler &partic
     auto startPos = _particleHandler.getStartPos();
     auto geo = SphereGeometry::create(_particleHandler.getRadius());
     auto material = MeshBasicMaterial::create();
-    material->color.setRGB(0.4, 0.1, 0.1);
+    material->color.setRGB(0.2, 0.7, 1.0);
     auto mesh = Mesh::create(geo, material);
     mesh->position.set(startPos.x, startPos.y, startPos.y);
 
@@ -60,7 +60,7 @@ void ThreeppHandler::_drawBorder() {
     float sizeZ = _particleHandler.getBounding().z;
 
     static Box3 box{{-sizeX, -sizeY, -sizeZ},{sizeX, sizeY, sizeZ}};
-    auto boxHelper = Box3Helper::create(box);
+    auto boxHelper = Box3Helper::create(box, {1.0, 1.0, 1.0});
     _scene->add(boxHelper);
 }
 
@@ -147,12 +147,20 @@ void ThreeppHandler::CanvasAnimate() {
         if (fps < 120.0) {_maxCapasity = true;}
 
         //Mostly for debugging
-        _textHandles.at(0)->setText("Frame " + std::to_string(frameCount) + " | FPS: " + std::to_string((fps)) + " | dt: " + std::to_string(static_cast<int>(dt / 1000.0)) + "ms");
 
-        auto startPos = _particleHandler.getStartPos();
-        _spawnPointPreview->position.set(startPos.x, startPos.y, startPos.z);
-        _textHandles.at(1)->setText("Particles: " + std::to_string(particles.size()) + " | Start pos: {" + std::to_string(startPos.x) + ", " + std::to_string(startPos.y) + ", " + std::to_string(startPos.z) + "}");
-        _textHandles.at(2)->setText("Max antall: " + std::to_string(_particleHandler.getAntall()));
+        if (_textHandles.size() > 0) {
+            _textHandles.at(0)->setText("Frame " + std::to_string(frameCount) + " | FPS: " + std::to_string((fps)) + " | dt: " + std::to_string(static_cast<int>(dt / 1000.0)) + "ms");
+        }
+
+        if (_textHandles.size() > 1) {
+            auto startPos = _particleHandler.getStartPos();
+            _spawnPointPreview->position.set(startPos.x, startPos.y, startPos.z);
+            _textHandles.at(1)->setText("Particles: " + std::to_string(particles.size()) + " | Start pos: {" + std::to_string(startPos.x) + ", " + std::to_string(startPos.y) + ", " + std::to_string(startPos.z) + "}");
+        }
+
+        if (_textHandles.size() > 2) {
+            _textHandles.at(2)->setText("Max antall: " + std::to_string(_particleHandler.getAntall()));
+        }
 
         _renderer.render(*_scene, *_camera);
         _renderer.resetState();
