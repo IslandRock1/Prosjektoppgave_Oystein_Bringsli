@@ -60,7 +60,7 @@ jobs:
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
     - name: Install vcpkg
-      uses: microsoft/vcpkg@7b7866dd68a264c4e8fc623a8d74ee6baeb2b7ef
+      uses: microsoft/vcpkg@12c2a93b4007612b5ffa980c9d2235eb0bcac10f
 
     - name: Bootstrap vcpkg
       run: |
