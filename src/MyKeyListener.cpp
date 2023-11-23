@@ -14,32 +14,32 @@ void MyKeyListener::onKeyPressed(threepp::KeyEvent evt) {
     switch (evt.key) {
         case Key::A:
         {
-            _particleHandler.addToStartPos({-1, 0, 0});
+            _particleHandler.addToStartPos({-3, 0, 0});
         } break;
 
         case Key::D:
         {
-            _particleHandler.addToStartPos({1, 0, 0});
+            _particleHandler.addToStartPos({3, 0, 0});
         } break;
 
         case Key::Q:
         {
-            _particleHandler.addToStartPos({0, 0, -1});
+            _particleHandler.addToStartPos({0, 0, -3});
         } break;
 
         case Key::E:
         {
-            _particleHandler.addToStartPos({0, 0, 1});
+            _particleHandler.addToStartPos({0, 0, 3});
         } break;
 
         case Key::S:
         {
-            _particleHandler.addToStartPos({0, -1, 0});
+            _particleHandler.addToStartPos({0, -3, 0});
         } break;
 
         case Key::W:
         {
-            _particleHandler.addToStartPos({0, 1, 0});
+            _particleHandler.addToStartPos({0, 3, 0});
         } break;
 
         case Key::U:
@@ -63,32 +63,32 @@ void MyKeyListener::onKeyRepeat(threepp::KeyEvent evt) {
     switch (evt.key) {
         case Key::A:
         {
-            _particleHandler.addToStartPos({-1, 0, 0});
+            _particleHandler.addToStartPos({-5, 0, 0});
         } break;
 
         case Key::D:
         {
-            _particleHandler.addToStartPos({1, 0, 0});
+            _particleHandler.addToStartPos({5, 0, 0});
         } break;
 
         case Key::Q:
         {
-            _particleHandler.addToStartPos({0, 0, -1});
+            _particleHandler.addToStartPos({0, 0, -5});
         } break;
 
         case Key::E:
         {
-            _particleHandler.addToStartPos({0, 0, 1});
+            _particleHandler.addToStartPos({0, 0, 5});
         } break;
 
         case Key::S:
         {
-            _particleHandler.addToStartPos({0, -1, 0});
+            _particleHandler.addToStartPos({0, -5, 0});
         } break;
 
         case Key::W:
         {
-            _particleHandler.addToStartPos({0, 1, 0});
+            _particleHandler.addToStartPos({0, 5, 0});
         } break;
 
         case Key::U:

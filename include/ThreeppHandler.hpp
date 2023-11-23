@@ -72,7 +72,7 @@ private:
     std::vector<std::shared_ptr<Mesh>> _particleMeshes;
     std::shared_ptr<Mesh> _spawnPointPreview;
     void makeSpawnPoint();
-    bool _showSpawnPoint = false;
+    void updateSpawnPoint();
 
     bool _randomColor = false;
     Color _color = {1, 1, 1};

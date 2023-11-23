@@ -52,12 +52,17 @@ void ThreeppHandler::makeSpawnPoint() {
     auto material = MeshBasicMaterial::create();
     material->color.setRGB(0.2, 0.7, 1.0);
     auto mesh = Mesh::create(geo, material);
-    mesh->position.set(startPos.x, startPos.y, startPos.y);
+    mesh->position.set(startPos.x, startPos.y, startPos.z);
 
     _spawnPointPreview = mesh;
+}
 
-    //_scene->add(_spawnPointPreview);
-    //_scene->remove(*_spawnPointPreview);
+void ThreeppHandler::updateSpawnPoint() {
+    auto startPos = _particleHandler.getStartPos();
+    _spawnPointPreview->position.set(startPos.x, startPos.y, startPos.z);
+
+    if (_particleHandler.showPreview) {_scene->add(_spawnPointPreview);}
+    else {_scene->remove(*_spawnPointPreview);}
 }
 
 void ThreeppHandler::updateTextPos() {
@@ -180,6 +185,7 @@ void ThreeppHandler::CanvasAnimate() {
         frameCount++;
 
         _handleText();
+        updateSpawnPoint();
 
         _renderer.render(*_scene, *_camera);
         _renderer.resetState();
