@@ -33,6 +33,8 @@ public:
     void addToStartPos(const Vec3& deltaPosition);
     Vec3 getStartPos();
 
+    bool showPreview = false;
+
 private:
     int _antall;
     int _currentAntall = 0;

@@ -2,8 +2,9 @@
 // Created by Øystein Bringsli on 12/11/2023.
 //
 
-#include <threepp/threepp.hpp>
 #include "MyKeyListener.hpp"
+#include <iostream>
+#include <threepp/threepp.hpp>
 
 using namespace threepp;
 
@@ -50,6 +51,11 @@ void MyKeyListener::onKeyPressed(threepp::KeyEvent evt) {
         {
             _particleHandler.addToMaxAntall(-1);
         } break;
+
+        case Key::G:
+        {
+            _particleHandler.showPreview = true;
+        } break;
     }
 }
 
@@ -93,6 +99,15 @@ void MyKeyListener::onKeyRepeat(threepp::KeyEvent evt) {
         case Key::J:
         {
             _particleHandler.addToMaxAntall(-5);
+        } break;
+    }
+}
+
+void MyKeyListener::onKeyReleased(threepp::KeyEvent evt) {
+    switch (evt.key) {
+        case Key::G:
+        {
+            _particleHandler.showPreview = false;
         } break;
     }
 }

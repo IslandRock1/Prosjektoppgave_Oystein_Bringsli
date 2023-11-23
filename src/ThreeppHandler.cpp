@@ -35,16 +35,7 @@ ThreeppHandler::ThreeppHandler(const std::string& title, ParticleHandler &partic
     });
 
     _drawBorder();
-
-    auto startPos = _particleHandler.getStartPos();
-    auto geo = SphereGeometry::create(_particleHandler.getRadius());
-    auto material = MeshBasicMaterial::create();
-    material->color.setRGB(0.2, 0.7, 1.0);
-    auto mesh = Mesh::create(geo, material);
-    mesh->position.set(startPos.x, startPos.y, startPos.y);
-
-    _spawnPointPreview = mesh;
-    _scene->add(_spawnPointPreview);
+    makeSpawnPoint();
 
     _textMap = {
         {textHandles::frame, addText("", 0, 0, 1.5)},
@@ -56,7 +47,17 @@ ThreeppHandler::ThreeppHandler(const std::string& title, ParticleHandler &partic
 }
 
 void ThreeppHandler::makeSpawnPoint() {
+    auto startPos = _particleHandler.getStartPos();
+    auto geo = SphereGeometry::create(_particleHandler.getRadius());
+    auto material = MeshBasicMaterial::create();
+    material->color.setRGB(0.2, 0.7, 1.0);
+    auto mesh = Mesh::create(geo, material);
+    mesh->position.set(startPos.x, startPos.y, startPos.y);
 
+    _spawnPointPreview = mesh;
+
+    //_scene->add(_spawnPointPreview);
+    //_scene->remove(*_spawnPointPreview);
 }
 
 void ThreeppHandler::updateTextPos() {

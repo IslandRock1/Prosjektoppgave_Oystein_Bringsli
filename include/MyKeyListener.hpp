@@ -15,6 +15,7 @@ public:
     explicit MyKeyListener(ParticleHandler &handler);
     void onKeyPressed(KeyEvent evt) override;
     void onKeyRepeat(KeyEvent evt) override;
+    void onKeyReleased(KeyEvent evt) override;
 private:
     ParticleHandler &_particleHandler;
 };
