@@ -21,4 +21,4 @@ This simulation uses threepp to render. Witch means you might need these in the 
 
 ### Notes on implementation
 This simulation is built to act as an 80% physically based simulation, and 20% visually belivable/pleasing. This means that some of the friction and gravity calculation will not be 100% physicly accurate. This simulation also uses verlet integration, witch is also not perfectly accurate.
-You can change the max number of particles during runtime by using the "U" and "I" keys. You can also move the spawning point by using WASDQE keys.
+You can change the max number of particles during runtime by using the "U" and "I" keys. You can also move the spawning point by using WASDQE keys. To see the spawn point of particles hold "G"
