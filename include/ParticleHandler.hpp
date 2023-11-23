@@ -14,7 +14,7 @@ class ParticleHandler {
 public:
     ParticleHandler(Vec3 bounding_box_size, int max_antall, double radius);
 
-    void step(double dt, bool maxCapacity = false);
+    void step(double dt);
     void makeParticle();
     std::vector<Particle>& getParticles();
     double getRadius() const;
@@ -29,6 +29,7 @@ public:
 
     void addToMaxAntall(signed int deltaAntall);
     int getAntall() const;
+    int getCurrentAntall() const;
     void addToStartPos(const Vec3& deltaPosition);
     Vec3 getStartPos();
 

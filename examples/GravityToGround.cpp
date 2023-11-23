@@ -19,9 +19,8 @@ int main() {
     ThreeppHandler handler{"Particle Simulator", particleHandler};
     handler.setColor(1, 1, 1);
 
-    handler.addText("Frame 0", 0, 0, 1.5);
-    handler.addText("Particles: 0", 0, 20, 1.5);
-    handler.addText("Max antall: ", 0, 40, 1.5);
+    handler.particleText = true;
+    handler.fpsText = true;
 
     MyKeyListener myKeyListener(particleHandler);
     handler.addKeyListener(myKeyListener);

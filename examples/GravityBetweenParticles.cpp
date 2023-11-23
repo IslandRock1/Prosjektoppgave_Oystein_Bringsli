@@ -18,9 +18,6 @@ int main() {
     ThreeppHandler handler{"Particle Simulator", particleHandler};
     handler.setRandomColor(true);
 
-    handler.addText("Frame 0", 0, 0, 1.5);
-    handler.addText("Particles: 0", 0, 20, 1.5);
-
     MyKeyListener myKeyListener(particleHandler);
     handler.addKeyListener(myKeyListener);
 

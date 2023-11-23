@@ -45,6 +45,39 @@ ThreeppHandler::ThreeppHandler(const std::string& title, ParticleHandler &partic
 
     _spawnPointPreview = mesh;
     _scene->add(_spawnPointPreview);
+
+    _textMap = {
+        {textHandles::frame, addText("", 0, 0, 1.5)},
+        {textHandles::fps, addText("", 0, 0, 1.5)},
+        {textHandles::dt, addText("", 0, 0, 1.5)},
+        {textHandles::particles, addText("", 0, 0, 1.5)},
+        {textHandles::maxAntall, addText("", 0, 0, 1.5)}
+    };
+}
+
+void ThreeppHandler::makeSpawnPoint() {
+
+}
+
+void ThreeppHandler::updateTextPos() {
+    int offset = 20;
+    int framePos = 0;
+    int fpsPos;
+    int dtPos;
+    int particlePos;
+    int maxPos;
+
+    if (frameText) {fpsPos = framePos + offset;} else {fpsPos = framePos;}
+    if (fpsText) {dtPos = fpsPos + offset;} else {dtPos = fpsPos;}
+    if (dtText) {particlePos = dtPos + offset;} else {particlePos = dtPos;}
+    if (particleText) {maxPos = particlePos + offset;} else {maxPos = particlePos;}
+
+    _textMap.at(textHandles::frame)->setPosition(0, framePos);
+    _textMap.at(textHandles::fps)->setPosition(0, fpsPos);
+    _textMap.at(textHandles::dt)->setPosition(0, dtPos);
+    _textMap.at(textHandles::particles)->setPosition(0, particlePos);
+    _textMap.at(textHandles::maxAntall)->setPosition(0, maxPos);
+
 }
 
 void ThreeppHandler::setRandomColor(bool input) {_randomColor = input;}
@@ -64,13 +97,12 @@ void ThreeppHandler::_drawBorder() {
     _scene->add(boxHelper);
 }
 
-int ThreeppHandler::addText(const std::string& label, int x, int y, float scale) {
+TextHandle* ThreeppHandler::addText(const std::string& label, int x, int y, float scale) {
     auto& textHandle = _textRenderer.createHandle(label);
     textHandle.setPosition(x, y);
     textHandle.scale = scale;
 
-    _textHandles.push_back(&textHandle);
-    return _textHandles.size() - 1;
+    return &textHandle;
 }
 
 int ThreeppHandler::addCircle(float radius, int segments) {
@@ -123,11 +155,14 @@ void ThreeppHandler::setWindowResizeListener() {
 }
 
 void ThreeppHandler::CanvasAnimate() {
+    updateTextPos();
+
     _canvas.animate([&] {
         auto t0 = std::chrono::high_resolution_clock::now();
-        _particleHandler.step(0.01, _maxCapasity);
+        _particleHandler.step(0.005);
         auto t1 = std::chrono::high_resolution_clock::now();
-        auto dt = static_cast<double>(std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count());
+        dt = static_cast<double>(std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count());
+        fps = static_cast<int>(1000000.0 / dt);
 
         auto &particles = _particleHandler.getParticles();
 
@@ -142,28 +177,35 @@ void ThreeppHandler::CanvasAnimate() {
         }
 
         frameCount++;
-        auto fps = static_cast<int>(1000000.0 / dt);
-        //Allocates 50% of time to particle collisions, and rest to rendering. Not happy with this, should also be able to turn it off.
-        if (fps < 120.0) {_maxCapasity = true;}
 
-        //Mostly for debugging
-
-        if (_textHandles.size() > 0) {
-            _textHandles.at(0)->setText("Frame " + std::to_string(frameCount) + " | FPS: " + std::to_string((fps)) + " | dt: " + std::to_string(static_cast<int>(dt / 1000.0)) + "ms");
-        }
-
-        if (_textHandles.size() > 1) {
-            auto startPos = _particleHandler.getStartPos();
-            _spawnPointPreview->position.set(startPos.x, startPos.y, startPos.z);
-            _textHandles.at(1)->setText("Particles: " + std::to_string(particles.size()) + " | Start pos: {" + std::to_string(startPos.x) + ", " + std::to_string(startPos.y) + ", " + std::to_string(startPos.z) + "}");
-        }
-
-        if (_textHandles.size() > 2) {
-            _textHandles.at(2)->setText("Max antall: " + std::to_string(_particleHandler.getAntall()));
-        }
+        _handleText();
 
         _renderer.render(*_scene, *_camera);
         _renderer.resetState();
         _textRenderer.render();
     });
+}
+
+void ThreeppHandler::_handleText() {
+    if (frameText) {
+        _textMap.at(textHandles::frame)->setText("Frame " + std::to_string(frameCount));
+    }
+
+    if (fpsText && ((frameCount & 10) == 0)) {
+        if (fps > 999) {_textMap.at(textHandles::fps)->setText("FPS (particle calculations): 999+");}
+        else if (fps > 10) {_textMap.at(textHandles::fps)->setText("FPS (particle calculations): " + std::to_string(static_cast<int>(fps)));}
+        else {_textMap.at(textHandles::fps)->setText("FPS (particle calculations): " + std::to_string(fps));}
+    }
+
+    if (dtText && ((frameCount & 10) == 0)) {
+        _textMap.at(textHandles::dt)->setText("dt (particle calculations): " + std::to_string(static_cast<int>(dt / 1000.0)) + "ms");
+    }
+
+    if (particleText) {
+        _textMap.at(textHandles::particles)->setText("Particles: " + std::to_string(_particleHandler.getCurrentAntall()));
+    }
+
+    if (maxParticleText) {
+        _textMap.at(textHandles::maxAntall)->setText("Max antall: " + std::to_string(_particleHandler.getAntall()));
+    }
 }
