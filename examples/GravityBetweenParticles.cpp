@@ -16,7 +16,7 @@ int main() {
     particleHandler.setMinSpeed(0.1);
 
     ThreeppHandler handler{"Particle Simulator", particleHandler};
-    handler.setRandomColor(true);
+    handler.toggleRandomColor(true);
 
     MyKeyListener myKeyListener(particleHandler);
     handler.addKeyListener(myKeyListener);

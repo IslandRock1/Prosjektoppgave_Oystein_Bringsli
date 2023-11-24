@@ -21,6 +21,7 @@ void ParticleHandler::addGravity() {
 
     if (_gravityType == GravityType::BetweenObjects)
     {
+        // Needs to be further optimized
         for (Particle &p0 : _particles)
         {
             for (Particle &p1 : _particles)
@@ -130,7 +131,7 @@ void ParticleHandler::makeParticle() {
 
     static std::random_device dev;
     static std::mt19937 rng(dev());
-    int rand_size = 1000;
+    static int rand_size = 1000;
     static std::uniform_int_distribution<std::mt19937::result_type> random(0,rand_size);
     static std::uniform_int_distribution<std::mt19937::result_type> random_bool(0, 1);
 

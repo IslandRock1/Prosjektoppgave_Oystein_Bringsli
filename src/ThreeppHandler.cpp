@@ -86,7 +86,7 @@ void ThreeppHandler::updateTextPos() {
 
 }
 
-void ThreeppHandler::setRandomColor(bool input) {_randomColor = input;}
+void ThreeppHandler::toggleRandomColor(bool input) {_randomColor = input;}
 
 void ThreeppHandler::setColor(const Color &color) {_color = color;}
 
@@ -111,25 +111,13 @@ TextHandle* ThreeppHandler::addText(const std::string& label, int x, int y, floa
     return &textHandle;
 }
 
-int ThreeppHandler::addCircle(float radius, int segments) {
-    auto geometry = CircleGeometry::create(radius, segments);
-    auto material = MeshBasicMaterial::create();
-    material->color.copy(Color::aliceblue);
-    auto mesh = Mesh::create(geometry, material);
-
-    _particleMeshes.push_back(mesh);
-    _scene->add(mesh);
-
-    return _particleMeshes.size() - 1;
-}
-
 int ThreeppHandler::addSphere(Vec3 pos, float radius) {
     auto geometry = SphereGeometry::create(radius);
     auto material = MeshBasicMaterial::create();
 
-    std::random_device dev;
-    std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> random(0,255);
+    static std::random_device dev;
+    static std::mt19937 rng(dev());
+    static std::uniform_int_distribution<std::mt19937::result_type> random(0,255);
 
     if (_randomColor) {
         auto r = static_cast<float>(random(rng)) / 255.0f;
@@ -162,12 +150,15 @@ void ThreeppHandler::setWindowResizeListener() {
 
 void ThreeppHandler::CanvasAnimate() {
     updateTextPos();
+    static auto timeStep = [&](double dt) {
+        auto t0 = std::chrono::high_resolution_clock::now();
+        _particleHandler.step(dt);
+        auto t1 = std::chrono::high_resolution_clock::now();
+        return static_cast<double>(std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count());
+    };
 
     _canvas.animate([&] {
-        auto t0 = std::chrono::high_resolution_clock::now();
-        _particleHandler.step(0.005);
-        auto t1 = std::chrono::high_resolution_clock::now();
-        dt = static_cast<double>(std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count());
+        dt = timeStep(0.005);
         fps = static_cast<int>(1000000.0 / dt);
 
         auto &particles = _particleHandler.getParticles();

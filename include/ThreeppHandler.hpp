@@ -28,8 +28,6 @@ class ThreeppHandler {
 public:
     ThreeppHandler(const std::string& title, ParticleHandler &particleHandler);
 
-    //Potentially used in future for 2D physics.
-    int addCircle(float radius, int segments = 32);
     int addSphere(Vec3 pos, float radius);
 
     void addKeyListener(MyKeyListener &keyListener);
@@ -40,7 +38,7 @@ public:
     double fps = 0;
     double dt = 0;
 
-    void setRandomColor(bool input);
+    void toggleRandomColor(bool input);
     void setColor(const Color &color);
     void setColor(float r, float g, float b);
 
@@ -60,7 +58,7 @@ private:
     Clock _clock;
 
     void _drawBorder();
-    void _saveImage(); //Not implemented
+    void _saveImage(); //Not implemented yet.
 
     TextRenderer _textRenderer;
     std::vector<TextHandle*> _textHandles;

@@ -16,7 +16,7 @@ int main() {
     particleHandler.setFriction(0.99);
 
     ThreeppHandler handler{"Particle Simulator", particleHandler};
-    handler.setRandomColor(true);
+    handler.toggleRandomColor(true);
 
     handler.frameText = true;
     handler.particleText = true;
