@@ -10,7 +10,7 @@ https://youtu.be/nWXFzZYENKg
 https://youtu.be/U52HS8rBsdI
 
 ### Current state
-As of 22.11.23 the simulation library is in working condition. It still needs a lot in terms of being user firendly, and a lot of optimization.
+As of 24.11.23 the simulation library is in working condition. It still needs a lot in terms of being user firendly, and a lot of optimization.
 
 ### Todo:
     Implement better searching algorithm for particle collisions.
