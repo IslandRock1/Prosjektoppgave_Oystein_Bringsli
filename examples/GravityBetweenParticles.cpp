@@ -13,7 +13,7 @@ int main() {
     Vec3 boundingBoxSize = {100, 100, 100};
     ParticleHandler particleHandler = ParticleHandler(boundingBoxSize, 100, 5);
     particleHandler.setGravityType(GravityType::BetweenObjects);
-    particleHandler.setMinSpeed(0.1);
+    particleHandler.setMinSpeed(0.5);
 
     ThreeppHandler handler{"Particle Simulator", particleHandler};
     handler.toggleRandomColor(true);
