@@ -1,7 +1,13 @@
 # 3D Particle Simulator (Work in progress)
 
 This is a physically based simulator that renders and simulates particle collision and gravity in 3D.
-The project is largely based on a previous project of mine for a similar simulation in 2D.
+The project is largely based on a previous project of mine for a similar simulation in 2D. The previous project is not avalible on github, but you can find some examples here: 
+
+https://www.youtube.com/@oysteinmb1
+
+https://youtu.be/nWXFzZYENKg
+
+https://youtu.be/U52HS8rBsdI
 
 ### Current state
 As of 22.11.23 the simulation library is in working condition. It still needs a lot in terms of being user firendly, and a lot of optimization.
