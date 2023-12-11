@@ -1,6 +1,3 @@
-//
-// Created by Øystein Bringsli on 31/10/2023.
-//
 
 #include "GravityObject.hpp"
 

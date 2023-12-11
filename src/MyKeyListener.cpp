@@ -1,6 +1,4 @@
-//
-// Created by Øystein Bringsli on 12/11/2023.
-//
+
 
 #include "MyKeyListener.hpp"
 #include <iostream>

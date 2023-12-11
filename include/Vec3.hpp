@@ -1,6 +1,3 @@
-//
-// Created by Øystein Bringsli on 3/10/2023.
-//
 
 #ifndef PROSJEKTOPPGAVE_OYSTEIN_BRINGSLI_VEC3_HPP
 #define PROSJEKTOPPGAVE_OYSTEIN_BRINGSLI_VEC3_HPP

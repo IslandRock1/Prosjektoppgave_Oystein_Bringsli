@@ -1,6 +1,3 @@
-//
-// Created by Øystein Bringsli on 10/17/2023.
-//
 
 #include "Vec3.hpp"
 #include "Particle.hpp"

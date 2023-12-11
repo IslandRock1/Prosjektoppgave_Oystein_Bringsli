@@ -1,6 +1,3 @@
-//
-// Created by Øystein Bringsli on 3/10/2023.
-//
 
 #include <cmath>
 #include "Vec3.hpp"

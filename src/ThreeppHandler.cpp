@@ -1,6 +1,3 @@
-//
-// Created by Øystein Bringsli on 5/10/2023.
-//
 
 #include <threepp/threepp.hpp>
 
