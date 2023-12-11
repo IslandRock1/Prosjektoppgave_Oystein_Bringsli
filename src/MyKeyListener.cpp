@@ -1,7 +1,6 @@
 
 
 #include "MyKeyListener.hpp"
-#include <iostream>
 #include <threepp/threepp.hpp>
 
 using namespace threepp;

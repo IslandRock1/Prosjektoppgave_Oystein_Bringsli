@@ -1,7 +1,4 @@
 
-#include <functional>
-#include <optional>
-
 #include "Vec3.hpp"
 
 #ifndef PROSJEKTOPPGAVE_OYSTEIN_BRINGSLI_GRAVITYCONTROL_HPP
