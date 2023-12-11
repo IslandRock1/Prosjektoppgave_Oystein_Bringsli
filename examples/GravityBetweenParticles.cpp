@@ -1,6 +1,3 @@
-//
-// Created by Øystein Bringsli on 1/11/2023.
-//
 
 #include "GravityObject.hpp"
 #include "MyKeyListener.hpp"

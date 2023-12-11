@@ -1,6 +1,3 @@
-//
-// Created by Øystein Bringsli on 2/11/2023.
-//
 
 #include "GravityObject.hpp"
 #include "ParticleHandler.hpp"
