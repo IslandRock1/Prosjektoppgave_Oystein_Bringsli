@@ -12,6 +12,7 @@ https://youtu.be/nWXFzZYENKg
 https://youtu.be/U52HS8rBsdI
 
 The README file is in large part inspired by the readme of threepp.
+https://github.com/markaren/threepp/tree/master
 
 ### Current state
 As of 11.12.23 the simulation library is in working condition. It still needs a lot in terms of being user firendly, and a lot of optimization.
