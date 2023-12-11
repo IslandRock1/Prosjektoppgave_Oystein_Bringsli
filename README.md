@@ -39,3 +39,4 @@ You can change the max number of particles during runtime by using the "U" and "
 ### Examples
 ![img.png](imagesForReadme/simple.png)
 ![img.png](imagesForReadme/manyBalls.png)
+![img.png](imagesForReadme/centerGravity.png)
